@@ -1,0 +1,4 @@
+can.c:30:6:MX_CAN1_Init	8	static
+can.c:66:6:HAL_CAN_MspInit	48	static
+can.c:96:6:HAL_CAN_MspDeInit	16	static
+can.c:121:6:CAN_TX_filter_init	4	static
