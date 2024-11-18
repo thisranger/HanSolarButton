@@ -35,8 +35,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define maxState 	12 //TODO: Rename
-#define minState	0
+#define MAX_STATE 	12
+#define MIN_STATE	0
 
 /* USER CODE END PD */
 
@@ -199,13 +199,13 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
     if(GPIO_Pin == ButtonDown_Pin)
     {
-        if(state > minState)
+        if(state > MIN_STATE)
         {
             state = state - 1;
         }
     }
     else if(GPIO_Pin == ButtonUp_Pin) {
-        if(state < maxState)
+        if(state < MAX_STATE)
         {
             state = state + 1;
         }
