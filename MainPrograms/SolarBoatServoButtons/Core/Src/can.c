@@ -22,6 +22,7 @@
 
 /* USER CODE BEGIN 0 */
 #include "usart.h"
+#include "tim.h"
 
 CAN_RxHeaderTypeDef   	RxHeader;
 uint8_t               	RxData[8];
@@ -189,6 +190,8 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
     Error_Handler();
   }
 
+  __HAL_TIM_SET_COUNTER(&htim7, 0);
+  timExpired = 0;
   UART_Send("Test\n\r", 6);
 }
 

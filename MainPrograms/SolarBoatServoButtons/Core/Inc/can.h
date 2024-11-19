@@ -29,7 +29,7 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-
+extern volatile int timExpired;
 /* USER CODE END Includes */
 
 extern CAN_HandleTypeDef hcan1;

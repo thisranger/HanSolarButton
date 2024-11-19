@@ -51,6 +51,8 @@
 char 					uart_buf[50];
 int 					uart_buf_len;
 int						state;
+int						ledState;
+int delayTime=100;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -61,7 +63,8 @@ void MainLoop(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+enum ledStates {RED,GREEN};
+volatile int timExpired = 0;
 /* USER CODE END 0 */
 
 /**
@@ -99,6 +102,7 @@ int main(void)
   MX_CAN1_Init();
   MX_TIM2_Init();
   MX_USART2_UART_Init();
+  MX_TIM7_Init();
   /* USER CODE BEGIN 2 */
 
   CAN_TX_filter_init();
@@ -109,7 +113,23 @@ int main(void)
   {
 	  Error_Handler();
   }
+  if (HAL_TIM_Base_Start_IT(&htim7) != HAL_OK)
+    {
+  	  Error_Handler();
+    }
 
+  //Testfunction leds
+    HAL_GPIO_WritePin(GPIOB, GreenLed_Pin, RESET);
+    HAL_GPIO_WritePin(GPIOB, RedLed_Pin, SET);
+    for(int i = 0; i<6;i++)
+    {
+  	HAL_GPIO_TogglePin(GPIOB, GreenLed_Pin);
+  	HAL_GPIO_TogglePin(GPIOB, RedLed_Pin);
+  	HAL_Delay(500);
+    }
+    ledState = RED;
+    HAL_GPIO_WritePin(GPIOB, GreenLed_Pin, RESET);
+    HAL_GPIO_WritePin(GPIOB, RedLed_Pin, RESET);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -117,7 +137,9 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	MainLoop();
+	  MainLoop();
+	  HAL_GPIO_TogglePin(GPIOB, LD3_Pin);
+	  HAL_Delay(delayTime);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -187,14 +209,35 @@ void SystemClock_Config(void)
 
 void MainLoop(void)
 {
-	HAL_GPIO_TogglePin(GPIOB, LD3_Pin);
-	HAL_Delay(500);
+	if(ledState != RED && timExpired==1)
+	{
+		ledState = RED;
+		HAL_GPIO_WritePin(GPIOB, RedLed_Pin, RESET);
+		HAL_GPIO_WritePin(GPIOB, LD3_Pin, RESET);
+		delayTime = 500;
+	}
+	else if(ledState != GREEN && timExpired==0)
+	{
+		ledState = GREEN;
+		HAL_GPIO_WritePin(GPIOB, RedLed_Pin, SET);
+		HAL_GPIO_WritePin(GPIOB, LD3_Pin, SET);
+		delayTime = 250;
+	}
+
+
 }
 
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-    CAN_SendState(state);
+	if(htim == &htim2)
+	{
+		CAN_SendState(state);
+	}
+	if(htim == &htim7)
+	{
+		timExpired = 1;
+	}
 }
 
 
