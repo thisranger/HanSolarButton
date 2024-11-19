@@ -56,7 +56,7 @@ int						state;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-
+void MainLoop(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -117,7 +117,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	MainLoop();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -185,6 +185,11 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
+void MainLoop(void)
+{
+	HAL_GPIO_TogglePin(GPIOB, LD3_Pin);
+	HAL_Delay(500);
+}
 
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
@@ -214,7 +219,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     }
 
     uart_buf_len = sprintf(uart_buf, "state : %lu\n", state);
-    HAL_UART_Transmit(&huart2, (uint8_t *)uart_buf, uart_buf_len, 100);
+    UART_Send(uart_buf, uart_buf_len);
     CAN_SendState(state);
 }
 

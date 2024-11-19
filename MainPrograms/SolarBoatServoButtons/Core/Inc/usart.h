@@ -42,6 +42,8 @@ void MX_USART2_UART_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 
+void UART_Send(char* buf, uint8_t len);
+
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

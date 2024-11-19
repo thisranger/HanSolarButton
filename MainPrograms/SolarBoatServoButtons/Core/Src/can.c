@@ -21,6 +21,8 @@
 #include "can.h"
 
 /* USER CODE BEGIN 0 */
+#include "usart.h"
+
 CAN_RxHeaderTypeDef   	RxHeader;
 uint8_t               	RxData[8];
 CAN_TxHeaderTypeDef   	TxHeader;
@@ -48,9 +50,9 @@ void MX_CAN1_Init(void)
   hcan1.Init.TimeSeg1 = CAN_BS1_8TQ;
   hcan1.Init.TimeSeg2 = CAN_BS2_7TQ;
   hcan1.Init.TimeTriggeredMode = DISABLE;
-  hcan1.Init.AutoBusOff = DISABLE;
+  hcan1.Init.AutoBusOff = ENABLE;
   hcan1.Init.AutoWakeUp = DISABLE;
-  hcan1.Init.AutoRetransmission = DISABLE;
+  hcan1.Init.AutoRetransmission = ENABLE;
   hcan1.Init.ReceiveFifoLocked = DISABLE;
   hcan1.Init.TransmitFifoPriority = DISABLE;
   if (HAL_CAN_Init(&hcan1) != HAL_OK)
@@ -65,10 +67,10 @@ void MX_CAN1_Init(void)
     CAN_FilterTypeDef sFilterConfig;
 
     sFilterConfig.FilterFIFOAssignment = CAN_FILTER_FIFO0;
-    sFilterConfig.FilterIdHigh = 0x360<<5;
-    sFilterConfig.FilterIdLow = 0x360<<5;
-    sFilterConfig.FilterMaskIdHigh = 0xff<<5;
-    sFilterConfig.FilterMaskIdLow = 0xff<<5;
+    sFilterConfig.FilterIdHigh = 0<<5;
+    sFilterConfig.FilterIdLow = 0<<5;
+    sFilterConfig.FilterMaskIdHigh = 0x0<<5;
+    sFilterConfig.FilterMaskIdLow = 0x0<<5;
     sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
     sFilterConfig.FilterActivation = ENABLE;
     sFilterConfig.FilterBank = 0;
@@ -187,10 +189,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
     Error_Handler();
   }
 
-  if ((RxHeader.StdId == 0x360))
-  {
-
-  }
+  UART_Send("Test\n\r", 6);
 }
 
 
