@@ -37,6 +37,7 @@
 /* USER CODE BEGIN PD */
 #define MAX_STATE 	12
 #define MIN_STATE	0
+#define TIMEBUZZER 1000
 
 /* USER CODE END PD */
 
@@ -52,13 +53,14 @@ char 					uart_buf[50];
 int 					uart_buf_len;
 int						state;
 int						ledState;
-int delayTime=100;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 void MainLoop(void);
+void SysTick_Handler(void);
+uint32_t millis(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -91,7 +93,6 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
 
   SysTick_Config(SystemCoreClock / 1000);
 
@@ -138,8 +139,6 @@ int main(void)
   {
     /* USER CODE END WHILE */
 	  MainLoop();
-	  HAL_GPIO_TogglePin(GPIOB, LD3_Pin);
-	  HAL_Delay(delayTime);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -209,22 +208,26 @@ void SystemClock_Config(void)
 
 void MainLoop(void)
 {
+	static uint32_t stoptime;
 	if(ledState != RED && timExpired==1)
 	{
 		ledState = RED;
 		HAL_GPIO_WritePin(GPIOB, RedLed_Pin, RESET);
 		HAL_GPIO_WritePin(GPIOB, LD3_Pin, RESET);
-		delayTime = 500;
+		HAL_GPIO_WritePin(GPIOA, Buzzer_Pin, RESET);
 	}
 	else if(ledState != GREEN && timExpired==0)
 	{
 		ledState = GREEN;
 		HAL_GPIO_WritePin(GPIOB, RedLed_Pin, SET);
 		HAL_GPIO_WritePin(GPIOB, LD3_Pin, SET);
-		delayTime = 250;
+		stoptime = millis();
+		HAL_GPIO_WritePin(GPIOA, Buzzer_Pin, SET);
 	}
-
-
+	else if(millis() > (stoptime+TIMEBUZZER))
+	{
+		HAL_GPIO_WritePin(GPIOA, Buzzer_Pin, RESET);
+	}
 }
 
 
@@ -266,8 +269,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     CAN_SendState(state);
 }
 
-
-
 /* USER CODE END 4 */
 
 /**
@@ -279,6 +280,8 @@ void Error_Handler(void)
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
   __disable_irq();
+  HAL_GPIO_WritePin(GPIOB, LD3_Pin, SET);
+
   while (1)
   {
   }

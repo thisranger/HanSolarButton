@@ -61,7 +61,7 @@ void EXTI9_5_IRQHandler(void);
 void TIM2_IRQHandler(void);
 void TIM7_IRQHandler(void);
 /* USER CODE BEGIN EFP */
-
+uint32_t millis(void);
 /* USER CODE END EFP */
 
 #ifdef __cplusplus
