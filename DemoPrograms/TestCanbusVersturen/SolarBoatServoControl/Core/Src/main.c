@@ -116,14 +116,15 @@ int main(void)
         // Genereer een willekeurig ASCII karakter
     	sprintf(TxData, "%7d", i);
 
-    	if((i % 2) == 0)
-    	{
-    		TxHeader.StdId = get_random_4bit()<<7 | ((uint8_t)get_random_number()&0b01111111);
-    	}
-    	else
-    	{
-    		TxHeader.StdId = get_random_4bit()<<7 | 0x1;
-    	}
+//    	if((i % 2) == 0)
+//    	{
+//    		TxHeader.StdId = get_random_4bit()<<7 | ((uint8_t)get_random_number()&0b01111111);
+//    	}
+//    	else
+//    	{
+//    		TxHeader.StdId = get_random_4bit()<<7 | 0x1;
+//    	}
+    	TxHeader.StdId = get_random_4bit()<<7 | 0x1;
 			// Verstuur het CAN-bericht
 			if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, TxData, &TxMailbox) != HAL_OK)
 			{

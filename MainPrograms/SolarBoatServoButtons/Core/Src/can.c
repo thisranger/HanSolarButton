@@ -30,7 +30,6 @@ CAN_TxHeaderTypeDef   	TxHeader;
 uint8_t               	TxData[8];
 uint32_t              	TxMailbox;
 
-void CAN_Error_Handler(CAN_HandleTypeDef *hcan);
 /* USER CODE END 0 */
 
 CAN_HandleTypeDef hcan1;
@@ -60,7 +59,7 @@ void MX_CAN1_Init(void)
   hcan1.Init.TransmitFifoPriority = DISABLE;
   if (HAL_CAN_Init(&hcan1) != HAL_OK)
   {
-	  CAN_Error_Handler(&hcan1);
+    Error_Handler();
   }
   /* USER CODE BEGIN CAN1_Init 2 */
 
@@ -190,45 +189,11 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 	  Error_Handler();
   }
 
-  __HAL_TIM_SET_COUNTER(&htim7, 0);
-  timExpired = 0;
+  if((RxHeader.StdId & 0b01111111) == 0b00000001)
+  {
+	  __HAL_TIM_SET_COUNTER(&htim7, 0);
+  	  timExpired = 0;
+  }
 }
-
-void CAN_Error_Handler(CAN_HandleTypeDef *hcan)
-{
-    uint32_t error = HAL_CAN_GetError(hcan);
-
-    // Handle specific errors here
-    if (error & HAL_CAN_ERROR_EWG) {
-        // Handle Error Warning
-    }
-    if (error & HAL_CAN_ERROR_EPV) {
-        // Handle Error Passive
-    }
-    if (error & HAL_CAN_ERROR_BOF) {
-        // Handle Bus-Off
-    }
-    if (error & HAL_CAN_ERROR_STF) {
-        // Handle Stuff Error
-    }
-    if (error & HAL_CAN_ERROR_FOR) {
-        // Handle Form Error
-    }
-    if (error & HAL_CAN_ERROR_ACK) {
-        // Handle Acknowledge Error
-    }
-    if (error & HAL_CAN_ERROR_BR) {
-        // Handle Bit Rate Error
-    }
-    if (error & HAL_CAN_ERROR_BD) {
-        // Handle Bit Dominant Error
-    }
-    if (error & HAL_CAN_ERROR_CRC) {
-        // Handle CRC Error
-    }
-    HAL_GPIO_TogglePin(GPIOB, LD3_Pin);
-    hcan->Instance->ESR = 0;  // Reset het Error Status Register (ESR)
-}
-
 
 /* USER CODE END 1 */

@@ -60,13 +60,12 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 void MainLoop(void);
 void SysTick_Handler(void);
-uint32_t millis(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 enum ledStates {RED,GREEN};
-volatile int timExpired = 0;
+volatile bool timExpired = true;
 /* USER CODE END 0 */
 
 /**
@@ -124,22 +123,24 @@ int main(void)
     HAL_GPIO_WritePin(GPIOB, RedLed_Pin, SET);
     for(int i = 0; i<6;i++)
     {
-  	HAL_GPIO_TogglePin(GPIOB, GreenLed_Pin);
-  	HAL_GPIO_TogglePin(GPIOB, RedLed_Pin);
-  	HAL_Delay(500);
+		HAL_GPIO_TogglePin(GPIOB, GreenLed_Pin);
+		HAL_GPIO_TogglePin(GPIOB, RedLed_Pin);
+		HAL_Delay(500);
     }
     ledState = RED;
     HAL_GPIO_WritePin(GPIOB, GreenLed_Pin, RESET);
-    HAL_GPIO_WritePin(GPIOB, RedLed_Pin, RESET);
+    HAL_GPIO_WritePin(GPIOB, RedLed_Pin, SET);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
 	  MainLoop();
+    /* USER CODE END WHILE */
+
     /* USER CODE BEGIN 3 */
+
   }
   /* USER CODE END 3 */
 }
@@ -212,19 +213,18 @@ void MainLoop(void)
 	if(ledState != RED && timExpired==1)
 	{
 		ledState = RED;
-		HAL_GPIO_WritePin(GPIOB, RedLed_Pin, RESET);
-		HAL_GPIO_WritePin(GPIOB, LD3_Pin, RESET);
+		HAL_GPIO_WritePin(GPIOB, RedLed_Pin, SET);
 		HAL_GPIO_WritePin(GPIOA, Buzzer_Pin, RESET);
 	}
 	else if(ledState != GREEN && timExpired==0)
 	{
 		ledState = GREEN;
-		HAL_GPIO_WritePin(GPIOB, RedLed_Pin, SET);
-		HAL_GPIO_WritePin(GPIOB, LD3_Pin, SET);
-		stoptime = millis();
+		HAL_GPIO_WritePin(GPIOB, RedLed_Pin, RESET);
+		stoptime = HAL_GetTick();
 		HAL_GPIO_WritePin(GPIOA, Buzzer_Pin, SET);
 	}
-	else if(millis() > (stoptime+TIMEBUZZER))
+
+	if(HAL_GetTick() > (stoptime+TIMEBUZZER))
 	{
 		HAL_GPIO_WritePin(GPIOA, Buzzer_Pin, RESET);
 	}
@@ -279,12 +279,85 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
-  __disable_irq();
-  HAL_GPIO_WritePin(GPIOB, LD3_Pin, SET);
-
-  while (1)
-  {
-  }
+//	uint32_t error = HAL_CAN_GetError(&hcan1);
+//
+//	    // Handle specific errors here
+//	    if (error & HAL_CAN_ERROR_EWG) {
+//	        // Handle Error Warning
+//	    	hcan1.Instance->ESR = 0;  // Reset the Error Status Register (ESR)
+//	        __HAL_RCC_CAN1_FORCE_RESET();
+//	        HAL_Delay(1);
+//	        __HAL_RCC_CAN1_RELEASE_RESET();
+//	    }
+//	    if (error & HAL_CAN_ERROR_EPV) {
+//	        // Handle Error Passive
+//	    	hcan1.Instance->ESR = 0;  // Reset the Error Status Register (ESR)
+//	    	__HAL_RCC_CAN1_FORCE_RESET();
+//	    	HAL_Delay(1);
+//	    	__HAL_RCC_CAN1_RELEASE_RESET();
+//	    }
+//	    if (error & HAL_CAN_ERROR_BOF) {
+//	        // Handle Bus-Off
+//	    	hcan1.Instance->ESR = 0;  // Reset the Error Status Register (ESR)
+//	    	__HAL_RCC_CAN1_FORCE_RESET();
+//	    	HAL_Delay(1);
+//	    	__HAL_RCC_CAN1_RELEASE_RESET();
+//	    }
+//	    if (error & HAL_CAN_ERROR_STF) {
+//	        // Handle Stuff Error
+//	    	hcan1.Instance->ESR = 0;  // Reset the Error Status Register (ESR)
+//	    	__HAL_RCC_CAN1_FORCE_RESET();
+//	    	HAL_Delay(1);
+//	    	__HAL_RCC_CAN1_RELEASE_RESET();
+//	    }
+//	    if (error & HAL_CAN_ERROR_FOR) {
+//	        // Handle Form Error
+//	    	hcan1.Instance->ESR = 0;  // Reset the Error Status Register (ESR)
+//	    	__HAL_RCC_CAN1_FORCE_RESET();
+//	    	HAL_Delay(1);
+//	    	__HAL_RCC_CAN1_RELEASE_RESET();
+//	    }
+//	    if (error & HAL_CAN_ERROR_ACK) {
+//	        // Handle Acknowledge Error
+//	    	hcan1.Instance->ESR = 0;  // Reset the Error Status Register (ESR)
+//	    	__HAL_RCC_CAN1_FORCE_RESET();
+//	    	HAL_Delay(1);
+//	    	__HAL_RCC_CAN1_RELEASE_RESET();
+//	    }
+//	    if (error & HAL_CAN_ERROR_BR) {
+//	        // Handle Bit Rate Error
+//	    	hcan1.Instance->ESR = 0;  // Reset the Error Status Register (ESR)
+//	    	__HAL_RCC_CAN1_FORCE_RESET();
+//	    	HAL_Delay(1);
+//	    	__HAL_RCC_CAN1_RELEASE_RESET();
+//	    }
+//	    if (error & HAL_CAN_ERROR_BD) {
+//	        // Handle Bit Dominant Error
+//	    	hcan1.Instance->ESR = 0;  // Reset the Error Status Register (ESR)
+//	    	__HAL_RCC_CAN1_FORCE_RESET();
+//	    	HAL_Delay(1);
+//	    	__HAL_RCC_CAN1_RELEASE_RESET();
+//	    }
+//	    if (error & HAL_CAN_ERROR_CRC) {
+//	        // Handle CRC Error
+//	    	hcan1.Instance->ESR = 0;  // Reset the Error Status Register (ESR)
+//	    	__HAL_RCC_CAN1_FORCE_RESET();
+//	    	HAL_Delay(1);
+//	    	__HAL_RCC_CAN1_RELEASE_RESET();
+//	    }
+//	    else
+//	    {
+//		    __disable_irq();
+//		    //Perform a system reset
+//		    NVIC_SystemReset();
+//		    while (1)
+//		    {
+//		    }
+//	    }
+			    __disable_irq();
+			    while (1)
+			    {
+			    }
   /* USER CODE END Error_Handler_Debug */
 }
 

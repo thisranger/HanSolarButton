@@ -41,7 +41,6 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-volatile uint32_t millis_counter = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -189,7 +188,6 @@ void SysTick_Handler(void)
   /* USER CODE END SysTick_IRQn 0 */
   HAL_IncTick();
   /* USER CODE BEGIN SysTick_IRQn 1 */
-  millis_counter++;  // Increment your custom millis counter}
   /* USER CODE END SysTick_IRQn 1 */
 }
 
@@ -271,8 +269,4 @@ void TIM7_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
-uint32_t millis(void)
-{
-	return millis_counter; // Return the current value of the counter
-}
 /* USER CODE END 1 */
