@@ -214,12 +214,14 @@ void MainLoop(void)
 	{
 		ledState = RED;
 		HAL_GPIO_WritePin(GPIOB, RedLed_Pin, SET);
+		HAL_GPIO_WritePin(GPIOB, GreenLed_Pin, RESET);
 		HAL_GPIO_WritePin(GPIOA, Buzzer_Pin, RESET);
 	}
 	else if(ledState != GREEN && timExpired==0)
 	{
 		ledState = GREEN;
 		HAL_GPIO_WritePin(GPIOB, RedLed_Pin, RESET);
+		HAL_GPIO_WritePin(GPIOB, GreenLed_Pin, SET);
 		stoptime = HAL_GetTick();
 		HAL_GPIO_WritePin(GPIOA, Buzzer_Pin, SET);
 	}
