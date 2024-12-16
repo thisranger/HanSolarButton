@@ -29,12 +29,13 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-
+#include <string.h>
 /* USER CODE END Includes */
 
 extern UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN Private defines */
+#define SEND_STRING(s) (UART_Send(s, strlen(s)))
 
 /* USER CODE END Private defines */
 

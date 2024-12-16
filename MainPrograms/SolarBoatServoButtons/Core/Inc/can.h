@@ -45,6 +45,8 @@ void CAN_TX_filter_init(void);
 
 void CAN_SendState(int state);
 
+void CAN_Print_Errors(void);
+
 
 /* USER CODE END Prototypes */
 

@@ -90,6 +90,9 @@ void MX_CAN1_Init(void)
   		Error_Handler();
   	}
 
+    CAN_TX_filter_init();
+
+
   /* USER CODE END CAN1_Init 2 */
 
 }
@@ -119,7 +122,7 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
     /* CAN1 interrupt Init */
-    HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 0, 0);
+    HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 2, 0);
     HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
   /* USER CODE BEGIN CAN1_MspInit 1 */
 
@@ -189,11 +192,123 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 	  Error_Handler();
   }
 
-  if((RxHeader.StdId & 0b01111111) == 0b00000001)
-  {
-	  __HAL_TIM_SET_COUNTER(&htim7, 0);
-  	  timExpired = 0;
-  }
+  __HAL_TIM_SET_COUNTER(&htim7, 0);
+  timExpired = 0;
 }
+
+void CAN_Print_Errors(void) {
+	char 					uart_buf[50];
+	uint8_t 				uart_buf_len;
+	uint32_t error_code = HAL_CAN_GetError(&hcan1);
+
+    // Log the error code (Optional, use UART or a debugger)
+    uart_buf_len = sprintf(uart_buf, "CAN Error Code: 0x%08lX\n\r", error_code);
+    UART_Send(uart_buf, uart_buf_len);
+
+    // Error Handling
+    if (error_code == HAL_CAN_ERROR_NONE) {
+        // No error, do nothing
+        return;
+    }
+
+    if (error_code & HAL_CAN_ERROR_EWG) {
+        SEND_STRING("Protocol Error Warning detected.\n\r");
+    }
+
+    if (error_code & HAL_CAN_ERROR_EPV) {
+    	SEND_STRING("Error Passive state detected.\n\r");
+    }
+
+    if (error_code & HAL_CAN_ERROR_BOF) {
+    	SEND_STRING("Bus-Off error detected.\n\r");
+    }
+
+    if (error_code & HAL_CAN_ERROR_STF) {
+    	SEND_STRING("Stuff error detected.\n\r");
+    }
+
+    if (error_code & HAL_CAN_ERROR_FOR) {
+    	SEND_STRING("Form error detected.\n\r");
+    }
+
+    if (error_code & HAL_CAN_ERROR_ACK) {
+    	SEND_STRING("Acknowledgment error detected.\n\r");
+    }
+
+    if (error_code & HAL_CAN_ERROR_BR) {
+    	SEND_STRING("Bit Recessive error detected.\n\r");
+    }
+
+    if (error_code & HAL_CAN_ERROR_BD) {
+    	SEND_STRING("Bit Dominant error detected.\n\r");
+    }
+
+    if (error_code & HAL_CAN_ERROR_CRC) {
+    	SEND_STRING("CRC error detected.\n\r");
+    }
+
+    if (error_code & HAL_CAN_ERROR_RX_FOV0) {
+    	SEND_STRING("RX FIFO0 Overrun detected.\n\r");
+    }
+
+    if (error_code & HAL_CAN_ERROR_RX_FOV1) {
+    	SEND_STRING("RX FIFO1 Overrun detected.\n\r");
+    }
+
+    if (error_code & HAL_CAN_ERROR_TX_ALST0) {
+    	SEND_STRING("TX Mailbox 0 Arbitration lost.\n\r");
+    }
+
+    if (error_code & HAL_CAN_ERROR_TX_TERR0) {
+    	SEND_STRING("TX Mailbox 0 Transmission error.\n\r");
+    }
+
+    if (error_code & HAL_CAN_ERROR_TX_ALST1) {
+    	SEND_STRING("TX Mailbox 1 Arbitration lost.\n\r");
+    }
+
+    if (error_code & HAL_CAN_ERROR_TX_TERR1) {
+    	SEND_STRING("TX Mailbox 1 Transmission error.\n\r");
+    }
+
+    if (error_code & HAL_CAN_ERROR_TX_ALST2) {
+    	SEND_STRING("TX Mailbox 2 Arbitration lost.\n\r");
+    }
+
+    if (error_code & HAL_CAN_ERROR_TX_TERR2) {
+    	SEND_STRING("TX Mailbox 2 Transmission error.\n\r");
+    }
+
+    if (error_code & HAL_CAN_ERROR_TIMEOUT) {
+    	SEND_STRING("Timeout error detected.\n\r");
+    }
+
+    if (error_code & HAL_CAN_ERROR_NOT_INITIALIZED) {
+    	SEND_STRING("CAN Peripheral not initialized.\n\r");
+    }
+
+    if (error_code & HAL_CAN_ERROR_NOT_READY) {
+    	SEND_STRING("CAN Peripheral not ready.\n\r");
+    }
+
+    if (error_code & HAL_CAN_ERROR_NOT_STARTED) {
+    	SEND_STRING("CAN Peripheral not started.\n\r");
+    }
+
+    if (error_code & HAL_CAN_ERROR_PARAM) {
+    	SEND_STRING("Parameter error detected.\n\r");
+    }
+
+#if USE_HAL_CAN_REGISTER_CALLBACKS == 1
+    if (error_code & HAL_CAN_ERROR_INVALID_CALLBACK) {
+    	SEND_STRING("Invalid callback error detected.\n\r");
+    }
+#endif
+
+    if (error_code & HAL_CAN_ERROR_INTERNAL) {
+    	SEND_STRING("Internal error detected.\n\r");
+    }
+}
+
 
 /* USER CODE END 1 */

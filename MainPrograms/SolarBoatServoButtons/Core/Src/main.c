@@ -49,9 +49,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-char 					uart_buf[50];
-int 					uart_buf_len;
-int						state;
+volatile uint8_t		servoState;
 int						ledState;
 /* USER CODE END PV */
 
@@ -105,9 +103,11 @@ int main(void)
   MX_TIM7_Init();
   /* USER CODE BEGIN 2 */
 
+  SEND_STRING("Completed init\n\r");
+
   CAN_TX_filter_init();
-  state = 8;
-  CAN_SendState(state);
+  servoState = 8;
+  CAN_SendState(servoState);
 
   if (HAL_TIM_Base_Start_IT(&htim2) != HAL_OK)
   {
@@ -121,11 +121,11 @@ int main(void)
   //Testfunction leds
     HAL_GPIO_WritePin(GPIOB, GreenLed_Pin, RESET);
     HAL_GPIO_WritePin(GPIOB, RedLed_Pin, SET);
-    for(int i = 0; i<6;i++)
+    for(int i = 0; i<6; i++)
     {
-		HAL_GPIO_TogglePin(GPIOB, GreenLed_Pin);
-		HAL_GPIO_TogglePin(GPIOB, RedLed_Pin);
-		HAL_Delay(500);
+    HAL_GPIO_TogglePin(GPIOB, GreenLed_Pin);
+    HAL_GPIO_TogglePin(GPIOB, RedLed_Pin);
+    HAL_Delay(500);
     }
     ledState = RED;
     HAL_GPIO_WritePin(GPIOB, GreenLed_Pin, RESET);
@@ -134,13 +134,13 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+    HAL_GPIO_WritePin(GPIOB, LD3_Pin, SET);
+
   while (1)
   {
-	  MainLoop();
     /* USER CODE END WHILE */
-
+	  MainLoop();
     /* USER CODE BEGIN 3 */
-
   }
   /* USER CODE END 3 */
 }
@@ -237,7 +237,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if(htim == &htim2)
 	{
-		CAN_SendState(state);
+		CAN_SendState(servoState);
 	}
 	if(htim == &htim7)
 	{
@@ -249,26 +249,28 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
+	char 					uart_buf[50];
+	uint8_t 				uart_buf_len;
 
     if(GPIO_Pin == ButtonDown_Pin)
     {
-        if(state > MIN_STATE)
+        if(servoState > MIN_STATE)
         {
-            state = state - 1;
+            servoState -= 1;
         }
     }
     else if(GPIO_Pin == ButtonUp_Pin) {
-        if(state < MAX_STATE)
+        if(servoState < MAX_STATE)
         {
-            state = state + 1;
+            servoState += 1;
         }
     } else {
         __NOP();
     }
 
-    uart_buf_len = sprintf(uart_buf, "state : %lu\n", state);
+    uart_buf_len = sprintf(uart_buf, "servoState : %u\n\r", servoState);
     UART_Send(uart_buf, uart_buf_len);
-    CAN_SendState(state);
+    CAN_SendState(servoState);
 }
 
 /* USER CODE END 4 */
@@ -281,85 +283,19 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
-//	uint32_t error = HAL_CAN_GetError(&hcan1);
-//
-//	    // Handle specific errors here
-//	    if (error & HAL_CAN_ERROR_EWG) {
-//	        // Handle Error Warning
-//	    	hcan1.Instance->ESR = 0;  // Reset the Error Status Register (ESR)
-//	        __HAL_RCC_CAN1_FORCE_RESET();
-//	        HAL_Delay(1);
-//	        __HAL_RCC_CAN1_RELEASE_RESET();
-//	    }
-//	    if (error & HAL_CAN_ERROR_EPV) {
-//	        // Handle Error Passive
-//	    	hcan1.Instance->ESR = 0;  // Reset the Error Status Register (ESR)
-//	    	__HAL_RCC_CAN1_FORCE_RESET();
-//	    	HAL_Delay(1);
-//	    	__HAL_RCC_CAN1_RELEASE_RESET();
-//	    }
-//	    if (error & HAL_CAN_ERROR_BOF) {
-//	        // Handle Bus-Off
-//	    	hcan1.Instance->ESR = 0;  // Reset the Error Status Register (ESR)
-//	    	__HAL_RCC_CAN1_FORCE_RESET();
-//	    	HAL_Delay(1);
-//	    	__HAL_RCC_CAN1_RELEASE_RESET();
-//	    }
-//	    if (error & HAL_CAN_ERROR_STF) {
-//	        // Handle Stuff Error
-//	    	hcan1.Instance->ESR = 0;  // Reset the Error Status Register (ESR)
-//	    	__HAL_RCC_CAN1_FORCE_RESET();
-//	    	HAL_Delay(1);
-//	    	__HAL_RCC_CAN1_RELEASE_RESET();
-//	    }
-//	    if (error & HAL_CAN_ERROR_FOR) {
-//	        // Handle Form Error
-//	    	hcan1.Instance->ESR = 0;  // Reset the Error Status Register (ESR)
-//	    	__HAL_RCC_CAN1_FORCE_RESET();
-//	    	HAL_Delay(1);
-//	    	__HAL_RCC_CAN1_RELEASE_RESET();
-//	    }
-//	    if (error & HAL_CAN_ERROR_ACK) {
-//	        // Handle Acknowledge Error
-//	    	hcan1.Instance->ESR = 0;  // Reset the Error Status Register (ESR)
-//	    	__HAL_RCC_CAN1_FORCE_RESET();
-//	    	HAL_Delay(1);
-//	    	__HAL_RCC_CAN1_RELEASE_RESET();
-//	    }
-//	    if (error & HAL_CAN_ERROR_BR) {
-//	        // Handle Bit Rate Error
-//	    	hcan1.Instance->ESR = 0;  // Reset the Error Status Register (ESR)
-//	    	__HAL_RCC_CAN1_FORCE_RESET();
-//	    	HAL_Delay(1);
-//	    	__HAL_RCC_CAN1_RELEASE_RESET();
-//	    }
-//	    if (error & HAL_CAN_ERROR_BD) {
-//	        // Handle Bit Dominant Error
-//	    	hcan1.Instance->ESR = 0;  // Reset the Error Status Register (ESR)
-//	    	__HAL_RCC_CAN1_FORCE_RESET();
-//	    	HAL_Delay(1);
-//	    	__HAL_RCC_CAN1_RELEASE_RESET();
-//	    }
-//	    if (error & HAL_CAN_ERROR_CRC) {
-//	        // Handle CRC Error
-//	    	hcan1.Instance->ESR = 0;  // Reset the Error Status Register (ESR)
-//	    	__HAL_RCC_CAN1_FORCE_RESET();
-//	    	HAL_Delay(1);
-//	    	__HAL_RCC_CAN1_RELEASE_RESET();
-//	    }
-//	    else
-//	    {
-//		    __disable_irq();
-//		    //Perform a system reset
-//		    NVIC_SystemReset();
-//		    while (1)
-//		    {
-//		    }
-//	    }
-			    __disable_irq();
-			    while (1)
-			    {
-			    }
+  __disable_irq();
+	HAL_GPIO_WritePin(GPIOB, RedLed_Pin, RESET);
+	HAL_GPIO_WritePin(GPIOB, LD3_Pin, RESET);
+	HAL_GPIO_WritePin(GPIOA, Buzzer_Pin, RESET);
+  CAN_Print_Errors();
+
+
+  SEND_STRING("Resetting due to error\n\r");
+  HAL_Delay(500);
+  NVIC_SystemReset();
+
+  while(1){}
+
   /* USER CODE END Error_Handler_Debug */
 }
 
