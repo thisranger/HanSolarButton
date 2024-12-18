@@ -26,6 +26,9 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
+#include "stm32l4xx.h"
+#include "stm32l4xx_hal.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -90,7 +93,6 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
   SysTick_Config(SystemCoreClock / 1000);
 
   /* USER CODE END SysInit */
@@ -139,7 +141,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  MainLoop();
+	MainLoop();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -283,18 +285,19 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
-  __disable_irq();
 	HAL_GPIO_WritePin(GPIOB, RedLed_Pin, RESET);
-	HAL_GPIO_WritePin(GPIOB, LD3_Pin, RESET);
 	HAL_GPIO_WritePin(GPIOA, Buzzer_Pin, RESET);
-  CAN_Print_Errors();
+	HAL_GPIO_WritePin(GPIOB, LD3_Pin, RESET);
+	CAN_Print_Errors();
 
+	SEND_STRING("Resetting due to error\n\r");
 
-  SEND_STRING("Resetting due to error\n\r");
-  HAL_Delay(500);
+  __disable_irq();  // Ensure no interrupts interfere
+
   NVIC_SystemReset();
 
-  while(1){}
+  while(1){
+  }
 
   /* USER CODE END Error_Handler_Debug */
 }
