@@ -27,9 +27,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  00007060  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0001387e  00000000  00000000  00007090  2**0
+ 12 .debug_info   00013886  00000000  00000000  00007090  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00002b1b  00000000  00000000  0001a90e  2**0
+ 13 .debug_abbrev 00002b19  00000000  00000000  0001a916  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  14 .debug_aranges 000010f0  00000000  00000000  0001d430  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -37,11 +37,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  00021c74  00000000  00000000  0001f240  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00014636  00000000  00000000  00040eb4  2**0
+ 17 .debug_line   00014635  00000000  00000000  00040eb4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000cc46d  00000000  00000000  000554ea  2**0
+ 18 .debug_str    000cc46d  00000000  00000000  000554e9  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  00121957  2**0
+ 19 .comment      00000043  00000000  00000000  00121956  2**0
                   CONTENTS, READONLY
  20 .debug_frame  00004b50  00000000  00000000  0012199c  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -405,81 +405,80 @@ Disassembly of section .text:
  800055e:	bf00      	nop
 
 08000560 <MX_CAN1_Init>:
+/* USER CODE END 0 */
 
 CAN_HandleTypeDef hcan1;
 
 /* CAN1 init function */
-void MX_CAN1_Init(void)
-{
+void MX_CAN1_Init(void) {
  8000560:	b580      	push	{r7, lr}
  8000562:	b08a      	sub	sp, #40	@ 0x28
  8000564:	af00      	add	r7, sp, #0
-  /* USER CODE END CAN1_Init 0 */
+    /* USER CODE END CAN1_Init 0 */
 
-  /* USER CODE BEGIN CAN1_Init 1 */
+    /* USER CODE BEGIN CAN1_Init 1 */
 
-  /* USER CODE END CAN1_Init 1 */
-  hcan1.Instance = CAN1;
+    /* USER CODE END CAN1_Init 1 */
+    hcan1.Instance = CAN1;
  8000566:	4b33      	ldr	r3, [pc, #204]	@ (8000634 <MX_CAN1_Init+0xd4>)
  8000568:	4a33      	ldr	r2, [pc, #204]	@ (8000638 <MX_CAN1_Init+0xd8>)
  800056a:	601a      	str	r2, [r3, #0]
-  hcan1.Init.Prescaler = 8;
+    hcan1.Init.Prescaler = 8;
  800056c:	4b31      	ldr	r3, [pc, #196]	@ (8000634 <MX_CAN1_Init+0xd4>)
  800056e:	2208      	movs	r2, #8
  8000570:	605a      	str	r2, [r3, #4]
-  hcan1.Init.Mode = CAN_MODE_NORMAL;
+    hcan1.Init.Mode = CAN_MODE_NORMAL;
  8000572:	4b30      	ldr	r3, [pc, #192]	@ (8000634 <MX_CAN1_Init+0xd4>)
  8000574:	2200      	movs	r2, #0
  8000576:	609a      	str	r2, [r3, #8]
-  hcan1.Init.SyncJumpWidth = CAN_SJW_1TQ;
+    hcan1.Init.SyncJumpWidth = CAN_SJW_1TQ;
  8000578:	4b2e      	ldr	r3, [pc, #184]	@ (8000634 <MX_CAN1_Init+0xd4>)
  800057a:	2200      	movs	r2, #0
  800057c:	60da      	str	r2, [r3, #12]
-  hcan1.Init.TimeSeg1 = CAN_BS1_8TQ;
+    hcan1.Init.TimeSeg1 = CAN_BS1_8TQ;
  800057e:	4b2d      	ldr	r3, [pc, #180]	@ (8000634 <MX_CAN1_Init+0xd4>)
  8000580:	f44f 22e0 	mov.w	r2, #458752	@ 0x70000
  8000584:	611a      	str	r2, [r3, #16]
-  hcan1.Init.TimeSeg2 = CAN_BS2_7TQ;
+    hcan1.Init.TimeSeg2 = CAN_BS2_7TQ;
  8000586:	4b2b      	ldr	r3, [pc, #172]	@ (8000634 <MX_CAN1_Init+0xd4>)
  8000588:	f44f 02c0 	mov.w	r2, #6291456	@ 0x600000
  800058c:	615a      	str	r2, [r3, #20]
-  hcan1.Init.TimeTriggeredMode = DISABLE;
+    hcan1.Init.TimeTriggeredMode = DISABLE;
  800058e:	4b29      	ldr	r3, [pc, #164]	@ (8000634 <MX_CAN1_Init+0xd4>)
  8000590:	2200      	movs	r2, #0
  8000592:	761a      	strb	r2, [r3, #24]
-  hcan1.Init.AutoBusOff = ENABLE;
+    hcan1.Init.AutoBusOff = ENABLE;
  8000594:	4b27      	ldr	r3, [pc, #156]	@ (8000634 <MX_CAN1_Init+0xd4>)
  8000596:	2201      	movs	r2, #1
  8000598:	765a      	strb	r2, [r3, #25]
-  hcan1.Init.AutoWakeUp = DISABLE;
+    hcan1.Init.AutoWakeUp = DISABLE;
  800059a:	4b26      	ldr	r3, [pc, #152]	@ (8000634 <MX_CAN1_Init+0xd4>)
  800059c:	2200      	movs	r2, #0
  800059e:	769a      	strb	r2, [r3, #26]
-  hcan1.Init.AutoRetransmission = ENABLE;
+    hcan1.Init.AutoRetransmission = ENABLE;
  80005a0:	4b24      	ldr	r3, [pc, #144]	@ (8000634 <MX_CAN1_Init+0xd4>)
  80005a2:	2201      	movs	r2, #1
  80005a4:	76da      	strb	r2, [r3, #27]
-  hcan1.Init.ReceiveFifoLocked = DISABLE;
+    hcan1.Init.ReceiveFifoLocked = DISABLE;
  80005a6:	4b23      	ldr	r3, [pc, #140]	@ (8000634 <MX_CAN1_Init+0xd4>)
  80005a8:	2200      	movs	r2, #0
  80005aa:	771a      	strb	r2, [r3, #28]
-  hcan1.Init.TransmitFifoPriority = DISABLE;
+    hcan1.Init.TransmitFifoPriority = DISABLE;
  80005ac:	4b21      	ldr	r3, [pc, #132]	@ (8000634 <MX_CAN1_Init+0xd4>)
  80005ae:	2200      	movs	r2, #0
  80005b0:	775a      	strb	r2, [r3, #29]
-  if (HAL_CAN_Init(&hcan1) != HAL_OK)
+    if (HAL_CAN_Init(&hcan1) != HAL_OK) {
  80005b2:	4820      	ldr	r0, [pc, #128]	@ (8000634 <MX_CAN1_Init+0xd4>)
  80005b4:	f000 ffee 	bl	8001594 <HAL_CAN_Init>
  80005b8:	4603      	mov	r3, r0
  80005ba:	2b00      	cmp	r3, #0
  80005bc:	d001      	beq.n	80005c2 <MX_CAN1_Init+0x62>
-  {
-    Error_Handler();
+        Error_Handler();
  80005be:	f000 fca7 	bl	8000f10 <Error_Handler>
-  }
-  /* USER CODE BEGIN CAN1_Init 2 */
+    }
+    /* USER CODE BEGIN CAN1_Init 2 */
 
-  HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 0, 0);
+    HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 0, 0);
  80005c2:	2200      	movs	r2, #0
  80005c4:	2100      	movs	r1, #0
  80005c6:	2014      	movs	r0, #20
@@ -527,33 +526,32 @@ void MX_CAN1_Init(void)
  8000602:	f001 f8c2 	bl	800178a <HAL_CAN_ConfigFilter>
 
 
-  	if (HAL_CAN_Start(&hcan1) != HAL_OK) {
+    if (HAL_CAN_Start(&hcan1) != HAL_OK) {
  8000606:	480b      	ldr	r0, [pc, #44]	@ (8000634 <MX_CAN1_Init+0xd4>)
  8000608:	f001 f989 	bl	800191e <HAL_CAN_Start>
  800060c:	4603      	mov	r3, r0
  800060e:	2b00      	cmp	r3, #0
  8000610:	d001      	beq.n	8000616 <MX_CAN1_Init+0xb6>
-  		Error_Handler();
+        Error_Handler();
  8000612:	f000 fc7d 	bl	8000f10 <Error_Handler>
-  	}
+    }
 
-  	if(HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK)
+    if (HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK) {
  8000616:	2102      	movs	r1, #2
  8000618:	4806      	ldr	r0, [pc, #24]	@ (8000634 <MX_CAN1_Init+0xd4>)
  800061a:	f001 fbb6 	bl	8001d8a <HAL_CAN_ActivateNotification>
  800061e:	4603      	mov	r3, r0
  8000620:	2b00      	cmp	r3, #0
  8000622:	d001      	beq.n	8000628 <MX_CAN1_Init+0xc8>
-  	{
-  		Error_Handler();
+        Error_Handler();
  8000624:	f000 fc74 	bl	8000f10 <Error_Handler>
-  	}
+    }
 
     CAN_TX_filter_init();
  8000628:	f000 f854 	bl	80006d4 <CAN_TX_filter_init>
 
 
-  /* USER CODE END CAN1_Init 2 */
+    /* USER CODE END CAN1_Init 2 */
 
 }
  800062c:	bf00      	nop
@@ -565,14 +563,13 @@ void MX_CAN1_Init(void)
 
 0800063c <HAL_CAN_MspInit>:
 
-void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
-{
+void HAL_CAN_MspInit(CAN_HandleTypeDef *canHandle) {
  800063c:	b580      	push	{r7, lr}
  800063e:	b08a      	sub	sp, #40	@ 0x28
  8000640:	af00      	add	r7, sp, #0
  8000642:	6078      	str	r0, [r7, #4]
 
-  GPIO_InitTypeDef GPIO_InitStruct = {0};
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
  8000644:	f107 0314 	add.w	r3, r7, #20
  8000648:	2200      	movs	r2, #0
  800064a:	601a      	str	r2, [r3, #0]
@@ -580,18 +577,17 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
  800064e:	609a      	str	r2, [r3, #8]
  8000650:	60da      	str	r2, [r3, #12]
  8000652:	611a      	str	r2, [r3, #16]
-  if(canHandle->Instance==CAN1)
+    if (canHandle->Instance == CAN1) {
  8000654:	687b      	ldr	r3, [r7, #4]
  8000656:	681b      	ldr	r3, [r3, #0]
  8000658:	4a1c      	ldr	r2, [pc, #112]	@ (80006cc <HAL_CAN_MspInit+0x90>)
  800065a:	4293      	cmp	r3, r2
  800065c:	d131      	bne.n	80006c2 <HAL_CAN_MspInit+0x86>
-  {
-  /* USER CODE BEGIN CAN1_MspInit 0 */
+        /* USER CODE BEGIN CAN1_MspInit 0 */
 
-  /* USER CODE END CAN1_MspInit 0 */
-    /* CAN1 clock enable */
-    __HAL_RCC_CAN1_CLK_ENABLE();
+        /* USER CODE END CAN1_MspInit 0 */
+        /* CAN1 clock enable */
+        __HAL_RCC_CAN1_CLK_ENABLE();
  800065e:	4b1c      	ldr	r3, [pc, #112]	@ (80006d0 <HAL_CAN_MspInit+0x94>)
  8000660:	6d9b      	ldr	r3, [r3, #88]	@ 0x58
  8000662:	4a1b      	ldr	r2, [pc, #108]	@ (80006d0 <HAL_CAN_MspInit+0x94>)
@@ -603,7 +599,7 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
  8000672:	613b      	str	r3, [r7, #16]
  8000674:	693b      	ldr	r3, [r7, #16]
 
-    __HAL_RCC_GPIOA_CLK_ENABLE();
+        __HAL_RCC_GPIOA_CLK_ENABLE();
  8000676:	4b16      	ldr	r3, [pc, #88]	@ (80006d0 <HAL_CAN_MspInit+0x94>)
  8000678:	6cdb      	ldr	r3, [r3, #76]	@ 0x4c
  800067a:	4a15      	ldr	r2, [pc, #84]	@ (80006d0 <HAL_CAN_MspInit+0x94>)
@@ -614,44 +610,44 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
  8000686:	f003 0301 	and.w	r3, r3, #1
  800068a:	60fb      	str	r3, [r7, #12]
  800068c:	68fb      	ldr	r3, [r7, #12]
-    /**CAN1 GPIO Configuration
-    PA11     ------> CAN1_RX
-    PA12     ------> CAN1_TX
-    */
-    GPIO_InitStruct.Pin = GPIO_PIN_11|GPIO_PIN_12;
+        /**CAN1 GPIO Configuration
+        PA11     ------> CAN1_RX
+        PA12     ------> CAN1_TX
+        */
+        GPIO_InitStruct.Pin = GPIO_PIN_11 | GPIO_PIN_12;
  800068e:	f44f 53c0 	mov.w	r3, #6144	@ 0x1800
  8000692:	617b      	str	r3, [r7, #20]
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+        GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
  8000694:	2302      	movs	r3, #2
  8000696:	61bb      	str	r3, [r7, #24]
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
+        GPIO_InitStruct.Pull = GPIO_NOPULL;
  8000698:	2300      	movs	r3, #0
  800069a:	61fb      	str	r3, [r7, #28]
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
  800069c:	2303      	movs	r3, #3
  800069e:	623b      	str	r3, [r7, #32]
-    GPIO_InitStruct.Alternate = GPIO_AF9_CAN1;
+        GPIO_InitStruct.Alternate = GPIO_AF9_CAN1;
  80006a0:	2309      	movs	r3, #9
  80006a2:	627b      	str	r3, [r7, #36]	@ 0x24
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+        HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
  80006a4:	f107 0314 	add.w	r3, r7, #20
  80006a8:	4619      	mov	r1, r3
  80006aa:	f04f 4090 	mov.w	r0, #1207959552	@ 0x48000000
  80006ae:	f001 fedf 	bl	8002470 <HAL_GPIO_Init>
 
-    /* CAN1 interrupt Init */
-    HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 3, 0);
+        /* CAN1 interrupt Init */
+        HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 3, 0);
  80006b2:	2200      	movs	r2, #0
  80006b4:	2103      	movs	r1, #3
  80006b6:	2014      	movs	r0, #20
  80006b8:	f001 fea3 	bl	8002402 <HAL_NVIC_SetPriority>
-    HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
+        HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
  80006bc:	2014      	movs	r0, #20
  80006be:	f001 febc 	bl	800243a <HAL_NVIC_EnableIRQ>
-  /* USER CODE BEGIN CAN1_MspInit 1 */
+        /* USER CODE BEGIN CAN1_MspInit 1 */
 
-  /* USER CODE END CAN1_MspInit 1 */
-  }
+        /* USER CODE END CAN1_MspInit 1 */
+    }
 }
  80006c2:	bf00      	nop
  80006c4:	3728      	adds	r7, #40	@ 0x28
@@ -662,35 +658,35 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
  80006d0:	40021000 	.word	0x40021000
 
 080006d4 <CAN_TX_filter_init>:
+    }
 }
 
 /* USER CODE BEGIN 1 */
 
-void CAN_TX_filter_init(void)
-{
+void CAN_TX_filter_init(void) {
  80006d4:	b480      	push	{r7}
  80006d6:	af00      	add	r7, sp, #0
-	TxHeader.StdId = 0x360;
+    TxHeader.StdId = 0x360;
  80006d8:	4b0b      	ldr	r3, [pc, #44]	@ (8000708 <CAN_TX_filter_init+0x34>)
  80006da:	f44f 7258 	mov.w	r2, #864	@ 0x360
  80006de:	601a      	str	r2, [r3, #0]
-	TxHeader.ExtId = 0;
+    TxHeader.ExtId = 0;
  80006e0:	4b09      	ldr	r3, [pc, #36]	@ (8000708 <CAN_TX_filter_init+0x34>)
  80006e2:	2200      	movs	r2, #0
  80006e4:	605a      	str	r2, [r3, #4]
-	TxHeader.IDE = CAN_ID_STD;
+    TxHeader.IDE = CAN_ID_STD;
  80006e6:	4b08      	ldr	r3, [pc, #32]	@ (8000708 <CAN_TX_filter_init+0x34>)
  80006e8:	2200      	movs	r2, #0
  80006ea:	609a      	str	r2, [r3, #8]
-	TxHeader.RTR = CAN_RTR_DATA;
+    TxHeader.RTR = CAN_RTR_DATA;
  80006ec:	4b06      	ldr	r3, [pc, #24]	@ (8000708 <CAN_TX_filter_init+0x34>)
  80006ee:	2200      	movs	r2, #0
  80006f0:	60da      	str	r2, [r3, #12]
-	TxHeader.DLC = 8;
+    TxHeader.DLC = 8;
  80006f2:	4b05      	ldr	r3, [pc, #20]	@ (8000708 <CAN_TX_filter_init+0x34>)
  80006f4:	2208      	movs	r2, #8
  80006f6:	611a      	str	r2, [r3, #16]
-	TxHeader.TransmitGlobalTime = DISABLE;
+    TxHeader.TransmitGlobalTime = DISABLE;
  80006f8:	4b03      	ldr	r3, [pc, #12]	@ (8000708 <CAN_TX_filter_init+0x34>)
  80006fa:	2200      	movs	r2, #0
  80006fc:	751a      	strb	r2, [r3, #20]
@@ -704,8 +700,7 @@ void CAN_TX_filter_init(void)
 0800070c <CAN_SendState>:
 
 
-void CAN_SendState(int state)
-{
+void CAN_SendState(int state) {
  800070c:	b580      	push	{r7, lr}
  800070e:	b082      	sub	sp, #8
  8000710:	af00      	add	r7, sp, #0
@@ -746,7 +741,7 @@ void CAN_SendState(int state)
  8000746:	2200      	movs	r2, #0
  8000748:	71da      	strb	r2, [r3, #7]
 
-    if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, (uint8_t*)TxData, &TxMailbox) != HAL_OK)
+    if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, (uint8_t *) TxData, &TxMailbox) != HAL_OK) {
  800074a:	4b08      	ldr	r3, [pc, #32]	@ (800076c <CAN_SendState+0x60>)
  800074c:	4a06      	ldr	r2, [pc, #24]	@ (8000768 <CAN_SendState+0x5c>)
  800074e:	4908      	ldr	r1, [pc, #32]	@ (8000770 <CAN_SendState+0x64>)
@@ -755,8 +750,7 @@ void CAN_SendState(int state)
  8000756:	4603      	mov	r3, r0
  8000758:	2b00      	cmp	r3, #0
  800075a:	d001      	beq.n	8000760 <CAN_SendState+0x54>
-    {
-    	Error_Handler();
+        Error_Handler();
  800075c:	f000 fbd8 	bl	8000f10 <Error_Handler>
     }
 }
@@ -771,13 +765,12 @@ void CAN_SendState(int state)
 
 08000778 <HAL_CAN_RxFifo0MsgPendingCallback>:
 
-void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
-{
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) {
  8000778:	b580      	push	{r7, lr}
  800077a:	b082      	sub	sp, #8
  800077c:	af00      	add	r7, sp, #0
  800077e:	6078      	str	r0, [r7, #4]
-  if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, RxData) != HAL_OK)
+    if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, RxData) != HAL_OK) {
  8000780:	4b0a      	ldr	r3, [pc, #40]	@ (80007ac <HAL_CAN_RxFifo0MsgPendingCallback+0x34>)
  8000782:	4a0b      	ldr	r2, [pc, #44]	@ (80007b0 <HAL_CAN_RxFifo0MsgPendingCallback+0x38>)
  8000784:	2100      	movs	r1, #0
@@ -786,17 +779,16 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
  800078c:	4603      	mov	r3, r0
  800078e:	2b00      	cmp	r3, #0
  8000790:	d001      	beq.n	8000796 <HAL_CAN_RxFifo0MsgPendingCallback+0x1e>
-  {
-	  Error_Handler();
+        Error_Handler();
  8000792:	f000 fbbd 	bl	8000f10 <Error_Handler>
-  }
+    }
 
-  __HAL_TIM_SET_COUNTER(&htim7, 0);
+    __HAL_TIM_SET_COUNTER(&htim7, 0);
  8000796:	4b07      	ldr	r3, [pc, #28]	@ (80007b4 <HAL_CAN_RxFifo0MsgPendingCallback+0x3c>)
  8000798:	681b      	ldr	r3, [r3, #0]
  800079a:	2200      	movs	r2, #0
  800079c:	625a      	str	r2, [r3, #36]	@ 0x24
-  timExpired = 0;
+    timExpired = 0;
  800079e:	4b06      	ldr	r3, [pc, #24]	@ (80007b8 <HAL_CAN_RxFifo0MsgPendingCallback+0x40>)
  80007a0:	2200      	movs	r2, #0
  80007a2:	701a      	strb	r2, [r3, #0]
@@ -816,9 +808,9 @@ void CAN_Print_Errors(void) {
  80007bc:	b580      	push	{r7, lr}
  80007be:	b08e      	sub	sp, #56	@ 0x38
  80007c0:	af00      	add	r7, sp, #0
-	char 					uart_buf[50];
-	uint8_t 				uart_buf_len;
-	uint32_t error_code = HAL_CAN_GetError(&hcan1);
+    char uart_buf[50];
+    uint8_t uart_buf_len;
+    uint32_t error_code = HAL_CAN_GetError(&hcan1);
  80007c2:	4876      	ldr	r0, [pc, #472]	@ (800099c <CAN_Print_Errors+0x1e0>)
  80007c4:	f001 fd36 	bl	8002234 <HAL_CAN_GetError>
  80007c8:	6378      	str	r0, [r7, #52]	@ 0x34
@@ -864,7 +856,7 @@ void CAN_Print_Errors(void) {
  8000806:	f003 0302 	and.w	r3, r3, #2
  800080a:	2b00      	cmp	r3, #0
  800080c:	d003      	beq.n	8000816 <CAN_Print_Errors+0x5a>
-    	SEND_STRING("Error Passive state detected.\n\r");
+        SEND_STRING("Error Passive state detected.\n\r");
  800080e:	211f      	movs	r1, #31
  8000810:	4865      	ldr	r0, [pc, #404]	@ (80009a8 <CAN_Print_Errors+0x1ec>)
  8000812:	f000 fde9 	bl	80013e8 <UART_Send>
@@ -875,7 +867,7 @@ void CAN_Print_Errors(void) {
  8000818:	f003 0304 	and.w	r3, r3, #4
  800081c:	2b00      	cmp	r3, #0
  800081e:	d003      	beq.n	8000828 <CAN_Print_Errors+0x6c>
-    	SEND_STRING("Bus-Off error detected.\n\r");
+        SEND_STRING("Bus-Off error detected.\n\r");
  8000820:	2119      	movs	r1, #25
  8000822:	4862      	ldr	r0, [pc, #392]	@ (80009ac <CAN_Print_Errors+0x1f0>)
  8000824:	f000 fde0 	bl	80013e8 <UART_Send>
@@ -886,7 +878,7 @@ void CAN_Print_Errors(void) {
  800082a:	f003 0308 	and.w	r3, r3, #8
  800082e:	2b00      	cmp	r3, #0
  8000830:	d003      	beq.n	800083a <CAN_Print_Errors+0x7e>
-    	SEND_STRING("Stuff error detected.\n\r");
+        SEND_STRING("Stuff error detected.\n\r");
  8000832:	2117      	movs	r1, #23
  8000834:	485e      	ldr	r0, [pc, #376]	@ (80009b0 <CAN_Print_Errors+0x1f4>)
  8000836:	f000 fdd7 	bl	80013e8 <UART_Send>
@@ -897,7 +889,7 @@ void CAN_Print_Errors(void) {
  800083c:	f003 0310 	and.w	r3, r3, #16
  8000840:	2b00      	cmp	r3, #0
  8000842:	d003      	beq.n	800084c <CAN_Print_Errors+0x90>
-    	SEND_STRING("Form error detected.\n\r");
+        SEND_STRING("Form error detected.\n\r");
  8000844:	2116      	movs	r1, #22
  8000846:	485b      	ldr	r0, [pc, #364]	@ (80009b4 <CAN_Print_Errors+0x1f8>)
  8000848:	f000 fdce 	bl	80013e8 <UART_Send>
@@ -908,7 +900,7 @@ void CAN_Print_Errors(void) {
  800084e:	f003 0320 	and.w	r3, r3, #32
  8000852:	2b00      	cmp	r3, #0
  8000854:	d003      	beq.n	800085e <CAN_Print_Errors+0xa2>
-    	SEND_STRING("Acknowledgment error detected.\n\r");
+        SEND_STRING("Acknowledgment error detected.\n\r");
  8000856:	2120      	movs	r1, #32
  8000858:	4857      	ldr	r0, [pc, #348]	@ (80009b8 <CAN_Print_Errors+0x1fc>)
  800085a:	f000 fdc5 	bl	80013e8 <UART_Send>
@@ -919,7 +911,7 @@ void CAN_Print_Errors(void) {
  8000860:	f003 0340 	and.w	r3, r3, #64	@ 0x40
  8000864:	2b00      	cmp	r3, #0
  8000866:	d003      	beq.n	8000870 <CAN_Print_Errors+0xb4>
-    	SEND_STRING("Bit Recessive error detected.\n\r");
+        SEND_STRING("Bit Recessive error detected.\n\r");
  8000868:	211f      	movs	r1, #31
  800086a:	4854      	ldr	r0, [pc, #336]	@ (80009bc <CAN_Print_Errors+0x200>)
  800086c:	f000 fdbc 	bl	80013e8 <UART_Send>
@@ -930,7 +922,7 @@ void CAN_Print_Errors(void) {
  8000872:	f003 0380 	and.w	r3, r3, #128	@ 0x80
  8000876:	2b00      	cmp	r3, #0
  8000878:	d003      	beq.n	8000882 <CAN_Print_Errors+0xc6>
-    	SEND_STRING("Bit Dominant error detected.\n\r");
+        SEND_STRING("Bit Dominant error detected.\n\r");
  800087a:	211e      	movs	r1, #30
  800087c:	4850      	ldr	r0, [pc, #320]	@ (80009c0 <CAN_Print_Errors+0x204>)
  800087e:	f000 fdb3 	bl	80013e8 <UART_Send>
@@ -941,7 +933,7 @@ void CAN_Print_Errors(void) {
  8000884:	f403 7380 	and.w	r3, r3, #256	@ 0x100
  8000888:	2b00      	cmp	r3, #0
  800088a:	d003      	beq.n	8000894 <CAN_Print_Errors+0xd8>
-    	SEND_STRING("CRC error detected.\n\r");
+        SEND_STRING("CRC error detected.\n\r");
  800088c:	2115      	movs	r1, #21
  800088e:	484d      	ldr	r0, [pc, #308]	@ (80009c4 <CAN_Print_Errors+0x208>)
  8000890:	f000 fdaa 	bl	80013e8 <UART_Send>
@@ -952,7 +944,7 @@ void CAN_Print_Errors(void) {
  8000896:	f403 7300 	and.w	r3, r3, #512	@ 0x200
  800089a:	2b00      	cmp	r3, #0
  800089c:	d003      	beq.n	80008a6 <CAN_Print_Errors+0xea>
-    	SEND_STRING("RX FIFO0 Overrun detected.\n\r");
+        SEND_STRING("RX FIFO0 Overrun detected.\n\r");
  800089e:	211c      	movs	r1, #28
  80008a0:	4849      	ldr	r0, [pc, #292]	@ (80009c8 <CAN_Print_Errors+0x20c>)
  80008a2:	f000 fda1 	bl	80013e8 <UART_Send>
@@ -963,7 +955,7 @@ void CAN_Print_Errors(void) {
  80008a8:	f403 6380 	and.w	r3, r3, #1024	@ 0x400
  80008ac:	2b00      	cmp	r3, #0
  80008ae:	d003      	beq.n	80008b8 <CAN_Print_Errors+0xfc>
-    	SEND_STRING("RX FIFO1 Overrun detected.\n\r");
+        SEND_STRING("RX FIFO1 Overrun detected.\n\r");
  80008b0:	211c      	movs	r1, #28
  80008b2:	4846      	ldr	r0, [pc, #280]	@ (80009cc <CAN_Print_Errors+0x210>)
  80008b4:	f000 fd98 	bl	80013e8 <UART_Send>
@@ -974,7 +966,7 @@ void CAN_Print_Errors(void) {
  80008ba:	f403 6300 	and.w	r3, r3, #2048	@ 0x800
  80008be:	2b00      	cmp	r3, #0
  80008c0:	d003      	beq.n	80008ca <CAN_Print_Errors+0x10e>
-    	SEND_STRING("TX Mailbox 0 Arbitration lost.\n\r");
+        SEND_STRING("TX Mailbox 0 Arbitration lost.\n\r");
  80008c2:	2120      	movs	r1, #32
  80008c4:	4842      	ldr	r0, [pc, #264]	@ (80009d0 <CAN_Print_Errors+0x214>)
  80008c6:	f000 fd8f 	bl	80013e8 <UART_Send>
@@ -985,7 +977,7 @@ void CAN_Print_Errors(void) {
  80008cc:	f403 5380 	and.w	r3, r3, #4096	@ 0x1000
  80008d0:	2b00      	cmp	r3, #0
  80008d2:	d003      	beq.n	80008dc <CAN_Print_Errors+0x120>
-    	SEND_STRING("TX Mailbox 0 Transmission error.\n\r");
+        SEND_STRING("TX Mailbox 0 Transmission error.\n\r");
  80008d4:	2122      	movs	r1, #34	@ 0x22
  80008d6:	483f      	ldr	r0, [pc, #252]	@ (80009d4 <CAN_Print_Errors+0x218>)
  80008d8:	f000 fd86 	bl	80013e8 <UART_Send>
@@ -996,7 +988,7 @@ void CAN_Print_Errors(void) {
  80008de:	f403 5300 	and.w	r3, r3, #8192	@ 0x2000
  80008e2:	2b00      	cmp	r3, #0
  80008e4:	d003      	beq.n	80008ee <CAN_Print_Errors+0x132>
-    	SEND_STRING("TX Mailbox 1 Arbitration lost.\n\r");
+        SEND_STRING("TX Mailbox 1 Arbitration lost.\n\r");
  80008e6:	2120      	movs	r1, #32
  80008e8:	483b      	ldr	r0, [pc, #236]	@ (80009d8 <CAN_Print_Errors+0x21c>)
  80008ea:	f000 fd7d 	bl	80013e8 <UART_Send>
@@ -1007,7 +999,7 @@ void CAN_Print_Errors(void) {
  80008f0:	f403 4380 	and.w	r3, r3, #16384	@ 0x4000
  80008f4:	2b00      	cmp	r3, #0
  80008f6:	d003      	beq.n	8000900 <CAN_Print_Errors+0x144>
-    	SEND_STRING("TX Mailbox 1 Transmission error.\n\r");
+        SEND_STRING("TX Mailbox 1 Transmission error.\n\r");
  80008f8:	2122      	movs	r1, #34	@ 0x22
  80008fa:	4838      	ldr	r0, [pc, #224]	@ (80009dc <CAN_Print_Errors+0x220>)
  80008fc:	f000 fd74 	bl	80013e8 <UART_Send>
@@ -1018,7 +1010,7 @@ void CAN_Print_Errors(void) {
  8000902:	f403 4300 	and.w	r3, r3, #32768	@ 0x8000
  8000906:	2b00      	cmp	r3, #0
  8000908:	d003      	beq.n	8000912 <CAN_Print_Errors+0x156>
-    	SEND_STRING("TX Mailbox 2 Arbitration lost.\n\r");
+        SEND_STRING("TX Mailbox 2 Arbitration lost.\n\r");
  800090a:	2120      	movs	r1, #32
  800090c:	4834      	ldr	r0, [pc, #208]	@ (80009e0 <CAN_Print_Errors+0x224>)
  800090e:	f000 fd6b 	bl	80013e8 <UART_Send>
@@ -1029,7 +1021,7 @@ void CAN_Print_Errors(void) {
  8000914:	f403 3380 	and.w	r3, r3, #65536	@ 0x10000
  8000918:	2b00      	cmp	r3, #0
  800091a:	d003      	beq.n	8000924 <CAN_Print_Errors+0x168>
-    	SEND_STRING("TX Mailbox 2 Transmission error.\n\r");
+        SEND_STRING("TX Mailbox 2 Transmission error.\n\r");
  800091c:	2122      	movs	r1, #34	@ 0x22
  800091e:	4831      	ldr	r0, [pc, #196]	@ (80009e4 <CAN_Print_Errors+0x228>)
  8000920:	f000 fd62 	bl	80013e8 <UART_Send>
@@ -1040,7 +1032,7 @@ void CAN_Print_Errors(void) {
  8000926:	f403 3300 	and.w	r3, r3, #131072	@ 0x20000
  800092a:	2b00      	cmp	r3, #0
  800092c:	d003      	beq.n	8000936 <CAN_Print_Errors+0x17a>
-    	SEND_STRING("Timeout error detected.\n\r");
+        SEND_STRING("Timeout error detected.\n\r");
  800092e:	2119      	movs	r1, #25
  8000930:	482d      	ldr	r0, [pc, #180]	@ (80009e8 <CAN_Print_Errors+0x22c>)
  8000932:	f000 fd59 	bl	80013e8 <UART_Send>
@@ -1051,7 +1043,7 @@ void CAN_Print_Errors(void) {
  8000938:	f403 2380 	and.w	r3, r3, #262144	@ 0x40000
  800093c:	2b00      	cmp	r3, #0
  800093e:	d003      	beq.n	8000948 <CAN_Print_Errors+0x18c>
-    	SEND_STRING("CAN Peripheral not initialized.\n\r");
+        SEND_STRING("CAN Peripheral not initialized.\n\r");
  8000940:	2121      	movs	r1, #33	@ 0x21
  8000942:	482a      	ldr	r0, [pc, #168]	@ (80009ec <CAN_Print_Errors+0x230>)
  8000944:	f000 fd50 	bl	80013e8 <UART_Send>
@@ -1062,7 +1054,7 @@ void CAN_Print_Errors(void) {
  800094a:	f403 2300 	and.w	r3, r3, #524288	@ 0x80000
  800094e:	2b00      	cmp	r3, #0
  8000950:	d003      	beq.n	800095a <CAN_Print_Errors+0x19e>
-    	SEND_STRING("CAN Peripheral not ready.\n\r");
+        SEND_STRING("CAN Peripheral not ready.\n\r");
  8000952:	211b      	movs	r1, #27
  8000954:	4826      	ldr	r0, [pc, #152]	@ (80009f0 <CAN_Print_Errors+0x234>)
  8000956:	f000 fd47 	bl	80013e8 <UART_Send>
@@ -1073,7 +1065,7 @@ void CAN_Print_Errors(void) {
  800095c:	f403 1380 	and.w	r3, r3, #1048576	@ 0x100000
  8000960:	2b00      	cmp	r3, #0
  8000962:	d003      	beq.n	800096c <CAN_Print_Errors+0x1b0>
-    	SEND_STRING("CAN Peripheral not started.\n\r");
+        SEND_STRING("CAN Peripheral not started.\n\r");
  8000964:	211d      	movs	r1, #29
  8000966:	4823      	ldr	r0, [pc, #140]	@ (80009f4 <CAN_Print_Errors+0x238>)
  8000968:	f000 fd3e 	bl	80013e8 <UART_Send>
@@ -1084,12 +1076,12 @@ void CAN_Print_Errors(void) {
  800096e:	f403 1300 	and.w	r3, r3, #2097152	@ 0x200000
  8000972:	2b00      	cmp	r3, #0
  8000974:	d003      	beq.n	800097e <CAN_Print_Errors+0x1c2>
-    	SEND_STRING("Parameter error detected.\n\r");
+        SEND_STRING("Parameter error detected.\n\r");
  8000976:	211b      	movs	r1, #27
  8000978:	481f      	ldr	r0, [pc, #124]	@ (80009f8 <CAN_Print_Errors+0x23c>)
  800097a:	f000 fd35 	bl	80013e8 <UART_Send>
     if (error_code & HAL_CAN_ERROR_INVALID_CALLBACK) {
-    	SEND_STRING("Invalid callback error detected.\n\r");
+        SEND_STRING("Invalid callback error detected.\n\r");
     }
 #endif
 
@@ -1098,7 +1090,7 @@ void CAN_Print_Errors(void) {
  8000980:	f403 0300 	and.w	r3, r3, #8388608	@ 0x800000
  8000984:	2b00      	cmp	r3, #0
  8000986:	d005      	beq.n	8000994 <CAN_Print_Errors+0x1d8>
-    	SEND_STRING("Internal error detected.\n\r");
+        SEND_STRING("Internal error detected.\n\r");
  8000988:	211a      	movs	r1, #26
  800098a:	481c      	ldr	r0, [pc, #112]	@ (80009fc <CAN_Print_Errors+0x240>)
  800098c:	f000 fd2c 	bl	80013e8 <UART_Send>
@@ -1439,32 +1431,32 @@ __STATIC_INLINE uint32_t SysTick_Config(uint32_t ticks)
  8000bbc:	e000e010 	.word	0xe000e010
 
 08000bc0 <main>:
+
 /**
   * @brief  The application entry point.
   * @retval int
   */
-int main(void)
-{
+int main(void) {
  8000bc0:	b580      	push	{r7, lr}
  8000bc2:	b082      	sub	sp, #8
  8000bc4:	af00      	add	r7, sp, #0
-  /* USER CODE END 1 */
+    /* USER CODE END 1 */
 
-  /* MCU Configuration--------------------------------------------------------*/
+    /* MCU Configuration--------------------------------------------------------*/
 
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+    /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+    HAL_Init();
  8000bc6:	f000 fc4c 	bl	8001462 <HAL_Init>
-  /* USER CODE BEGIN Init */
+    /* USER CODE BEGIN Init */
 
-  /* USER CODE END Init */
+    /* USER CODE END Init */
 
-  /* Configure the system clock */
-  SystemClock_Config();
+    /* Configure the system clock */
+    SystemClock_Config();
  8000bca:	f000 f877 	bl	8000cbc <SystemClock_Config>
 
-  /* USER CODE BEGIN SysInit */
-  SysTick_Config(SystemCoreClock / 1000);
+    /* USER CODE BEGIN SysInit */
+    SysTick_Config(SystemCoreClock / 1000);
  8000bce:	4b33      	ldr	r3, [pc, #204]	@ (8000c9c <main+0xdc>)
  8000bd0:	681b      	ldr	r3, [r3, #0]
  8000bd2:	4a33      	ldr	r2, [pc, #204]	@ (8000ca0 <main+0xe0>)
@@ -1473,61 +1465,59 @@ int main(void)
  8000bda:	4618      	mov	r0, r3
  8000bdc:	f7ff ffce 	bl	8000b7c <SysTick_Config>
 
-  /* USER CODE END SysInit */
+    /* USER CODE END SysInit */
 
-  /* Initialize all configured peripherals */
-  MX_GPIO_Init();
+    /* Initialize all configured peripherals */
+    MX_GPIO_Init();
  8000be0:	f7ff ff0e 	bl	8000a00 <MX_GPIO_Init>
-  MX_CAN1_Init();
+    MX_CAN1_Init();
  8000be4:	f7ff fcbc 	bl	8000560 <MX_CAN1_Init>
-  MX_TIM2_Init();
+    MX_TIM2_Init();
  8000be8:	f000 fa9e 	bl	8001128 <MX_TIM2_Init>
-  MX_USART2_UART_Init();
+    MX_USART2_UART_Init();
  8000bec:	f000 fb62 	bl	80012b4 <MX_USART2_UART_Init>
-  MX_TIM7_Init();
+    MX_TIM7_Init();
  8000bf0:	f000 fae8 	bl	80011c4 <MX_TIM7_Init>
-  /* USER CODE BEGIN 2 */
+    /* USER CODE BEGIN 2 */
 
-  SEND_STRING("Completed init\n\r");
+    SEND_STRING("Completed init\n\r");
  8000bf4:	2110      	movs	r1, #16
  8000bf6:	482b      	ldr	r0, [pc, #172]	@ (8000ca4 <main+0xe4>)
  8000bf8:	f000 fbf6 	bl	80013e8 <UART_Send>
 
-  CAN_TX_filter_init();
+    CAN_TX_filter_init();
  8000bfc:	f7ff fd6a 	bl	80006d4 <CAN_TX_filter_init>
-  servoState = 8;
+    servoState = 8;
  8000c00:	4b29      	ldr	r3, [pc, #164]	@ (8000ca8 <main+0xe8>)
  8000c02:	2208      	movs	r2, #8
  8000c04:	701a      	strb	r2, [r3, #0]
-  CAN_SendState(servoState);
+    CAN_SendState(servoState);
  8000c06:	4b28      	ldr	r3, [pc, #160]	@ (8000ca8 <main+0xe8>)
  8000c08:	781b      	ldrb	r3, [r3, #0]
  8000c0a:	b2db      	uxtb	r3, r3
  8000c0c:	4618      	mov	r0, r3
  8000c0e:	f7ff fd7d 	bl	800070c <CAN_SendState>
 
-  if (HAL_TIM_Base_Start_IT(&htim2) != HAL_OK)
+    if (HAL_TIM_Base_Start_IT(&htim2) != HAL_OK) {
  8000c12:	4826      	ldr	r0, [pc, #152]	@ (8000cac <main+0xec>)
  8000c14:	f002 ffdc 	bl	8003bd0 <HAL_TIM_Base_Start_IT>
  8000c18:	4603      	mov	r3, r0
  8000c1a:	2b00      	cmp	r3, #0
  8000c1c:	d001      	beq.n	8000c22 <main+0x62>
-  {
-	  Error_Handler();
+        Error_Handler();
  8000c1e:	f000 f977 	bl	8000f10 <Error_Handler>
-  }
-  if (HAL_TIM_Base_Start_IT(&htim7) != HAL_OK)
+    }
+    if (HAL_TIM_Base_Start_IT(&htim7) != HAL_OK) {
  8000c22:	4823      	ldr	r0, [pc, #140]	@ (8000cb0 <main+0xf0>)
  8000c24:	f002 ffd4 	bl	8003bd0 <HAL_TIM_Base_Start_IT>
  8000c28:	4603      	mov	r3, r0
  8000c2a:	2b00      	cmp	r3, #0
  8000c2c:	d001      	beq.n	8000c32 <main+0x72>
-    {
-  	  Error_Handler();
+        Error_Handler();
  8000c2e:	f000 f96f 	bl	8000f10 <Error_Handler>
     }
 
-  //Testfunction leds
+    //Testfunction leds
     HAL_GPIO_WritePin(GPIOB, GreenLed_Pin, RESET);
  8000c32:	2200      	movs	r2, #0
  8000c34:	2120      	movs	r1, #32
@@ -1538,23 +1528,22 @@ int main(void)
  8000c3e:	2101      	movs	r1, #1
  8000c40:	481c      	ldr	r0, [pc, #112]	@ (8000cb4 <main+0xf4>)
  8000c42:	f001 fd7f 	bl	8002744 <HAL_GPIO_WritePin>
-    for(int i = 0; i<6; i++)
+    for (int i = 0; i < 6; i++) {
  8000c46:	2300      	movs	r3, #0
  8000c48:	607b      	str	r3, [r7, #4]
  8000c4a:	e00e      	b.n	8000c6a <main+0xaa>
-    {
-    HAL_GPIO_TogglePin(GPIOB, GreenLed_Pin);
+        HAL_GPIO_TogglePin(GPIOB, GreenLed_Pin);
  8000c4c:	2120      	movs	r1, #32
  8000c4e:	4819      	ldr	r0, [pc, #100]	@ (8000cb4 <main+0xf4>)
  8000c50:	f001 fd90 	bl	8002774 <HAL_GPIO_TogglePin>
-    HAL_GPIO_TogglePin(GPIOB, RedLed_Pin);
+        HAL_GPIO_TogglePin(GPIOB, RedLed_Pin);
  8000c54:	2101      	movs	r1, #1
  8000c56:	4817      	ldr	r0, [pc, #92]	@ (8000cb4 <main+0xf4>)
  8000c58:	f001 fd8c 	bl	8002774 <HAL_GPIO_TogglePin>
-    HAL_Delay(500);
+        HAL_Delay(500);
  8000c5c:	f44f 70fa 	mov.w	r0, #500	@ 0x1f4
  8000c60:	f000 fc74 	bl	800154c <HAL_Delay>
-    for(int i = 0; i<6; i++)
+    for (int i = 0; i < 6; i++) {
  8000c64:	687b      	ldr	r3, [r7, #4]
  8000c66:	3301      	adds	r3, #1
  8000c68:	607b      	str	r3, [r7, #4]
@@ -1576,20 +1565,19 @@ int main(void)
  8000c82:	2101      	movs	r1, #1
  8000c84:	480b      	ldr	r0, [pc, #44]	@ (8000cb4 <main+0xf4>)
  8000c86:	f001 fd5d 	bl	8002744 <HAL_GPIO_WritePin>
-  /* USER CODE END 2 */
+    /* USER CODE END 2 */
 
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
+    /* Infinite loop */
+    /* USER CODE BEGIN WHILE */
     HAL_GPIO_WritePin(GPIOB, LD3_Pin, SET);
  8000c8a:	2201      	movs	r2, #1
  8000c8c:	2108      	movs	r1, #8
  8000c8e:	4809      	ldr	r0, [pc, #36]	@ (8000cb4 <main+0xf4>)
  8000c90:	f001 fd58 	bl	8002744 <HAL_GPIO_WritePin>
 
-  while (1)
-  {
-    /* USER CODE END WHILE */
-	MainLoop();
+    while (1) {
+        /* USER CODE END WHILE */
+        MainLoop();
  8000c94:	f000 f874 	bl	8000d80 <MainLoop>
  8000c98:	e7fc      	b.n	8000c94 <main+0xd4>
  8000c9a:	bf00      	nop
@@ -1603,22 +1591,22 @@ int main(void)
  8000cb8:	200000f0 	.word	0x200000f0
 
 08000cbc <SystemClock_Config>:
+
 /**
   * @brief System Clock Configuration
   * @retval None
   */
-void SystemClock_Config(void)
-{
+void SystemClock_Config(void) {
  8000cbc:	b580      	push	{r7, lr}
  8000cbe:	b096      	sub	sp, #88	@ 0x58
  8000cc0:	af00      	add	r7, sp, #0
-  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+    RCC_OscInitTypeDef RCC_OscInitStruct = {0};
  8000cc2:	f107 0314 	add.w	r3, r7, #20
  8000cc6:	2244      	movs	r2, #68	@ 0x44
  8000cc8:	2100      	movs	r1, #0
  8000cca:	4618      	mov	r0, r3
  8000ccc:	f004 f89a 	bl	8004e04 <memset>
-  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+    RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
  8000cd0:	463b      	mov	r3, r7
  8000cd2:	2200      	movs	r2, #0
  8000cd4:	601a      	str	r2, [r3, #0]
@@ -1627,101 +1615,99 @@ void SystemClock_Config(void)
  8000cda:	60da      	str	r2, [r3, #12]
  8000cdc:	611a      	str	r2, [r3, #16]
 
-  /** Configure the main internal regulator output voltage
-  */
-  if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK)
+    /** Configure the main internal regulator output voltage
+    */
+    if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK) {
  8000cde:	f44f 7000 	mov.w	r0, #512	@ 0x200
  8000ce2:	f001 fd97 	bl	8002814 <HAL_PWREx_ControlVoltageScaling>
  8000ce6:	4603      	mov	r3, r0
  8000ce8:	2b00      	cmp	r3, #0
  8000cea:	d001      	beq.n	8000cf0 <SystemClock_Config+0x34>
-  {
-    Error_Handler();
+        Error_Handler();
  8000cec:	f000 f910 	bl	8000f10 <Error_Handler>
-  }
+    }
 
-  /** Configure LSE Drive Capability
-  */
-  HAL_PWR_EnableBkUpAccess();
+    /** Configure LSE Drive Capability
+    */
+    HAL_PWR_EnableBkUpAccess();
  8000cf0:	f001 fd72 	bl	80027d8 <HAL_PWR_EnableBkUpAccess>
-  __HAL_RCC_LSEDRIVE_CONFIG(RCC_LSEDRIVE_LOW);
+    __HAL_RCC_LSEDRIVE_CONFIG(RCC_LSEDRIVE_LOW);
  8000cf4:	4b21      	ldr	r3, [pc, #132]	@ (8000d7c <SystemClock_Config+0xc0>)
  8000cf6:	f8d3 3090 	ldr.w	r3, [r3, #144]	@ 0x90
  8000cfa:	4a20      	ldr	r2, [pc, #128]	@ (8000d7c <SystemClock_Config+0xc0>)
  8000cfc:	f023 0318 	bic.w	r3, r3, #24
  8000d00:	f8c2 3090 	str.w	r3, [r2, #144]	@ 0x90
 
-  /** Initializes the RCC Oscillators according to the specified parameters
-  * in the RCC_OscInitTypeDef structure.
-  */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSE|RCC_OSCILLATORTYPE_MSI;
+    /** Initializes the RCC Oscillators according to the specified parameters
+    * in the RCC_OscInitTypeDef structure.
+    */
+    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSE | RCC_OSCILLATORTYPE_MSI;
  8000d04:	2314      	movs	r3, #20
  8000d06:	617b      	str	r3, [r7, #20]
-  RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+    RCC_OscInitStruct.LSEState = RCC_LSE_ON;
  8000d08:	2301      	movs	r3, #1
  8000d0a:	61fb      	str	r3, [r7, #28]
-  RCC_OscInitStruct.MSIState = RCC_MSI_ON;
+    RCC_OscInitStruct.MSIState = RCC_MSI_ON;
  8000d0c:	2301      	movs	r3, #1
  8000d0e:	62fb      	str	r3, [r7, #44]	@ 0x2c
-  RCC_OscInitStruct.MSICalibrationValue = 0;
+    RCC_OscInitStruct.MSICalibrationValue = 0;
  8000d10:	2300      	movs	r3, #0
  8000d12:	633b      	str	r3, [r7, #48]	@ 0x30
-  RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
+    RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
  8000d14:	2360      	movs	r3, #96	@ 0x60
  8000d16:	637b      	str	r3, [r7, #52]	@ 0x34
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+    RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
  8000d18:	2302      	movs	r3, #2
  8000d1a:	63fb      	str	r3, [r7, #60]	@ 0x3c
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_MSI;
+    RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_MSI;
  8000d1c:	2301      	movs	r3, #1
  8000d1e:	643b      	str	r3, [r7, #64]	@ 0x40
-  RCC_OscInitStruct.PLL.PLLM = 1;
+    RCC_OscInitStruct.PLL.PLLM = 1;
  8000d20:	2301      	movs	r3, #1
  8000d22:	647b      	str	r3, [r7, #68]	@ 0x44
-  RCC_OscInitStruct.PLL.PLLN = 16;
+    RCC_OscInitStruct.PLL.PLLN = 16;
  8000d24:	2310      	movs	r3, #16
  8000d26:	64bb      	str	r3, [r7, #72]	@ 0x48
-  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV7;
+    RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV7;
  8000d28:	2307      	movs	r3, #7
  8000d2a:	64fb      	str	r3, [r7, #76]	@ 0x4c
-  RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
+    RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
  8000d2c:	2302      	movs	r3, #2
  8000d2e:	653b      	str	r3, [r7, #80]	@ 0x50
-  RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
+    RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
  8000d30:	2302      	movs	r3, #2
  8000d32:	657b      	str	r3, [r7, #84]	@ 0x54
-  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+    if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
  8000d34:	f107 0314 	add.w	r3, r7, #20
  8000d38:	4618      	mov	r0, r3
  8000d3a:	f001 fdc1 	bl	80028c0 <HAL_RCC_OscConfig>
  8000d3e:	4603      	mov	r3, r0
  8000d40:	2b00      	cmp	r3, #0
  8000d42:	d001      	beq.n	8000d48 <SystemClock_Config+0x8c>
-  {
-    Error_Handler();
+        Error_Handler();
  8000d44:	f000 f8e4 	bl	8000f10 <Error_Handler>
-  }
+    }
 
-  /** Initializes the CPU, AHB and APB buses clocks
-  */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+    /** Initializes the CPU, AHB and APB buses clocks
+    */
+    RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK
  8000d48:	230f      	movs	r3, #15
  8000d4a:	603b      	str	r3, [r7, #0]
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+                                  | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+    RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
  8000d4c:	2303      	movs	r3, #3
  8000d4e:	607b      	str	r3, [r7, #4]
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+    RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
  8000d50:	2300      	movs	r3, #0
  8000d52:	60bb      	str	r3, [r7, #8]
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+    RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
  8000d54:	2300      	movs	r3, #0
  8000d56:	60fb      	str	r3, [r7, #12]
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+    RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
  8000d58:	2300      	movs	r3, #0
  8000d5a:	613b      	str	r3, [r7, #16]
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
+    if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK) {
  8000d5c:	463b      	mov	r3, r7
  8000d5e:	2101      	movs	r1, #1
  8000d60:	4618      	mov	r0, r3
@@ -1729,14 +1715,13 @@ void SystemClock_Config(void)
  8000d66:	4603      	mov	r3, r0
  8000d68:	2b00      	cmp	r3, #0
  8000d6a:	d001      	beq.n	8000d70 <SystemClock_Config+0xb4>
-  {
-    Error_Handler();
+        Error_Handler();
  8000d6c:	f000 f8d0 	bl	8000f10 <Error_Handler>
-  }
+    }
 
-  /** Enable MSI Auto calibration
-  */
-  HAL_RCCEx_EnableMSIPLLMode();
+    /** Enable MSI Auto calibration
+    */
+    HAL_RCCEx_EnableMSIPLLMode();
  8000d70:	f002 fdd4 	bl	800391c <HAL_RCCEx_EnableMSIPLLMode>
 }
  8000d74:	bf00      	nop
@@ -1749,12 +1734,11 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
-void MainLoop(void)
-{
+void MainLoop(void) {
  8000d80:	b580      	push	{r7, lr}
  8000d82:	af00      	add	r7, sp, #0
-	static uint32_t stoptime;
-	if(ledState != RED && timExpired==1)
+    static uint32_t stoptime;
+    if (ledState != RED && timExpired == 1) {
  8000d84:	4b28      	ldr	r3, [pc, #160]	@ (8000e28 <MainLoop+0xa8>)
  8000d86:	681b      	ldr	r3, [r3, #0]
  8000d88:	2b00      	cmp	r3, #0
@@ -1764,29 +1748,27 @@ void MainLoop(void)
  8000d90:	b2db      	uxtb	r3, r3
  8000d92:	2b00      	cmp	r3, #0
  8000d94:	d013      	beq.n	8000dbe <MainLoop+0x3e>
-	{
-		ledState = RED;
+        ledState = RED;
  8000d96:	4b24      	ldr	r3, [pc, #144]	@ (8000e28 <MainLoop+0xa8>)
  8000d98:	2200      	movs	r2, #0
  8000d9a:	601a      	str	r2, [r3, #0]
-		HAL_GPIO_WritePin(GPIOB, RedLed_Pin, SET);
+        HAL_GPIO_WritePin(GPIOB, RedLed_Pin, SET);
  8000d9c:	2201      	movs	r2, #1
  8000d9e:	2101      	movs	r1, #1
  8000da0:	4823      	ldr	r0, [pc, #140]	@ (8000e30 <MainLoop+0xb0>)
  8000da2:	f001 fccf 	bl	8002744 <HAL_GPIO_WritePin>
-		HAL_GPIO_WritePin(GPIOB, GreenLed_Pin, RESET);
+        HAL_GPIO_WritePin(GPIOB, GreenLed_Pin, RESET);
  8000da6:	2200      	movs	r2, #0
  8000da8:	2120      	movs	r1, #32
  8000daa:	4821      	ldr	r0, [pc, #132]	@ (8000e30 <MainLoop+0xb0>)
  8000dac:	f001 fcca 	bl	8002744 <HAL_GPIO_WritePin>
-		HAL_GPIO_WritePin(GPIOA, Buzzer_Pin, RESET);
+        HAL_GPIO_WritePin(GPIOA, Buzzer_Pin, RESET);
  8000db0:	2200      	movs	r2, #0
  8000db2:	2101      	movs	r1, #1
  8000db4:	f04f 4090 	mov.w	r0, #1207959552	@ 0x48000000
  8000db8:	f001 fcc4 	bl	8002744 <HAL_GPIO_WritePin>
  8000dbc:	e023      	b.n	8000e06 <MainLoop+0x86>
-	}
-	else if(ledState != GREEN && timExpired==0)
+    } else if (ledState != GREEN && timExpired == 0) {
  8000dbe:	4b1a      	ldr	r3, [pc, #104]	@ (8000e28 <MainLoop+0xa8>)
  8000dc0:	681b      	ldr	r3, [r3, #0]
  8000dc2:	2b01      	cmp	r3, #1
@@ -1798,34 +1780,33 @@ void MainLoop(void)
  8000dd0:	b2db      	uxtb	r3, r3
  8000dd2:	2b00      	cmp	r3, #0
  8000dd4:	d017      	beq.n	8000e06 <MainLoop+0x86>
-	{
-		ledState = GREEN;
+        ledState = GREEN;
  8000dd6:	4b14      	ldr	r3, [pc, #80]	@ (8000e28 <MainLoop+0xa8>)
  8000dd8:	2201      	movs	r2, #1
  8000dda:	601a      	str	r2, [r3, #0]
-		HAL_GPIO_WritePin(GPIOB, RedLed_Pin, RESET);
+        HAL_GPIO_WritePin(GPIOB, RedLed_Pin, RESET);
  8000ddc:	2200      	movs	r2, #0
  8000dde:	2101      	movs	r1, #1
  8000de0:	4813      	ldr	r0, [pc, #76]	@ (8000e30 <MainLoop+0xb0>)
  8000de2:	f001 fcaf 	bl	8002744 <HAL_GPIO_WritePin>
-		HAL_GPIO_WritePin(GPIOB, GreenLed_Pin, SET);
+        HAL_GPIO_WritePin(GPIOB, GreenLed_Pin, SET);
  8000de6:	2201      	movs	r2, #1
  8000de8:	2120      	movs	r1, #32
  8000dea:	4811      	ldr	r0, [pc, #68]	@ (8000e30 <MainLoop+0xb0>)
  8000dec:	f001 fcaa 	bl	8002744 <HAL_GPIO_WritePin>
-		stoptime = HAL_GetTick();
+        stoptime = HAL_GetTick();
  8000df0:	f000 fba0 	bl	8001534 <HAL_GetTick>
  8000df4:	4603      	mov	r3, r0
  8000df6:	4a0f      	ldr	r2, [pc, #60]	@ (8000e34 <MainLoop+0xb4>)
  8000df8:	6013      	str	r3, [r2, #0]
-		HAL_GPIO_WritePin(GPIOA, Buzzer_Pin, SET);
+        HAL_GPIO_WritePin(GPIOA, Buzzer_Pin, SET);
  8000dfa:	2201      	movs	r2, #1
  8000dfc:	2101      	movs	r1, #1
  8000dfe:	f04f 4090 	mov.w	r0, #1207959552	@ 0x48000000
  8000e02:	f001 fc9f 	bl	8002744 <HAL_GPIO_WritePin>
-	}
+    }
 
-	if(HAL_GetTick() > (stoptime+TIMEBUZZER))
+    if (HAL_GetTick() > (stoptime + TIMEBUZZER)) {
  8000e06:	f000 fb95 	bl	8001534 <HAL_GetTick>
  8000e0a:	4602      	mov	r2, r0
  8000e0c:	4b09      	ldr	r3, [pc, #36]	@ (8000e34 <MainLoop+0xb4>)
@@ -1833,13 +1814,12 @@ void MainLoop(void)
  8000e10:	f503 737a 	add.w	r3, r3, #1000	@ 0x3e8
  8000e14:	429a      	cmp	r2, r3
  8000e16:	d905      	bls.n	8000e24 <MainLoop+0xa4>
-	{
-		HAL_GPIO_WritePin(GPIOA, Buzzer_Pin, RESET);
+        HAL_GPIO_WritePin(GPIOA, Buzzer_Pin, RESET);
  8000e18:	2200      	movs	r2, #0
  8000e1a:	2101      	movs	r1, #1
  8000e1c:	f04f 4090 	mov.w	r0, #1207959552	@ 0x48000000
  8000e20:	f001 fc90 	bl	8002744 <HAL_GPIO_WritePin>
-	}
+    }
 }
  8000e24:	bf00      	nop
  8000e26:	bd80      	pop	{r7, pc}
@@ -1851,36 +1831,33 @@ void MainLoop(void)
 08000e38 <HAL_TIM_PeriodElapsedCallback>:
 
 
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
  8000e38:	b580      	push	{r7, lr}
  8000e3a:	b082      	sub	sp, #8
  8000e3c:	af00      	add	r7, sp, #0
  8000e3e:	6078      	str	r0, [r7, #4]
-	if(htim == &htim2)
+    if (htim == &htim2) {
  8000e40:	687b      	ldr	r3, [r7, #4]
  8000e42:	4a0a      	ldr	r2, [pc, #40]	@ (8000e6c <HAL_TIM_PeriodElapsedCallback+0x34>)
  8000e44:	4293      	cmp	r3, r2
  8000e46:	d105      	bne.n	8000e54 <HAL_TIM_PeriodElapsedCallback+0x1c>
-	{
-		CAN_SendState(servoState);
+        CAN_SendState(servoState);
  8000e48:	4b09      	ldr	r3, [pc, #36]	@ (8000e70 <HAL_TIM_PeriodElapsedCallback+0x38>)
  8000e4a:	781b      	ldrb	r3, [r3, #0]
  8000e4c:	b2db      	uxtb	r3, r3
  8000e4e:	4618      	mov	r0, r3
  8000e50:	f7ff fc5c 	bl	800070c <CAN_SendState>
-	}
-	if(htim == &htim7)
+    }
+    if (htim == &htim7) {
  8000e54:	687b      	ldr	r3, [r7, #4]
  8000e56:	4a07      	ldr	r2, [pc, #28]	@ (8000e74 <HAL_TIM_PeriodElapsedCallback+0x3c>)
  8000e58:	4293      	cmp	r3, r2
  8000e5a:	d102      	bne.n	8000e62 <HAL_TIM_PeriodElapsedCallback+0x2a>
-	{
-		timExpired = 1;
+        timExpired = 1;
  8000e5c:	4b06      	ldr	r3, [pc, #24]	@ (8000e78 <HAL_TIM_PeriodElapsedCallback+0x40>)
  8000e5e:	2201      	movs	r2, #1
  8000e60:	701a      	strb	r2, [r3, #0]
-	}
+    }
 }
  8000e62:	bf00      	nop
  8000e64:	3708      	adds	r7, #8
@@ -1895,29 +1872,25 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 08000e7c <HAL_GPIO_EXTI_Callback>:
 
 
-
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
  8000e7c:	b580      	push	{r7, lr}
  8000e7e:	b090      	sub	sp, #64	@ 0x40
  8000e80:	af00      	add	r7, sp, #0
  8000e82:	4603      	mov	r3, r0
  8000e84:	80fb      	strh	r3, [r7, #6]
-	char 					uart_buf[50];
-	uint8_t 				uart_buf_len;
+    char uart_buf[50];
+    uint8_t uart_buf_len;
 
-    if(GPIO_Pin == ButtonDown_Pin)
+    if (GPIO_Pin == ButtonDown_Pin) {
  8000e86:	88fb      	ldrh	r3, [r7, #6]
  8000e88:	2b08      	cmp	r3, #8
  8000e8a:	d10c      	bne.n	8000ea6 <HAL_GPIO_EXTI_Callback+0x2a>
-    {
-        if(servoState > MIN_STATE)
+        if (servoState > MIN_STATE) {
  8000e8c:	4b1e      	ldr	r3, [pc, #120]	@ (8000f08 <HAL_GPIO_EXTI_Callback+0x8c>)
  8000e8e:	781b      	ldrb	r3, [r3, #0]
  8000e90:	b2db      	uxtb	r3, r3
  8000e92:	2b00      	cmp	r3, #0
  8000e94:	d018      	beq.n	8000ec8 <HAL_GPIO_EXTI_Callback+0x4c>
-        {
             servoState -= 1;
  8000e96:	4b1c      	ldr	r3, [pc, #112]	@ (8000f08 <HAL_GPIO_EXTI_Callback+0x8c>)
  8000e98:	781b      	ldrb	r3, [r3, #0]
@@ -1928,18 +1901,16 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
  8000ea2:	701a      	strb	r2, [r3, #0]
  8000ea4:	e010      	b.n	8000ec8 <HAL_GPIO_EXTI_Callback+0x4c>
         }
-    }
-    else if(GPIO_Pin == ButtonUp_Pin) {
+    } else if (GPIO_Pin == ButtonUp_Pin) {
  8000ea6:	88fb      	ldrh	r3, [r7, #6]
  8000ea8:	2b20      	cmp	r3, #32
  8000eaa:	d10c      	bne.n	8000ec6 <HAL_GPIO_EXTI_Callback+0x4a>
-        if(servoState < MAX_STATE)
+        if (servoState < MAX_STATE) {
  8000eac:	4b16      	ldr	r3, [pc, #88]	@ (8000f08 <HAL_GPIO_EXTI_Callback+0x8c>)
  8000eae:	781b      	ldrb	r3, [r3, #0]
  8000eb0:	b2db      	uxtb	r3, r3
  8000eb2:	2b0b      	cmp	r3, #11
  8000eb4:	d808      	bhi.n	8000ec8 <HAL_GPIO_EXTI_Callback+0x4c>
-        {
             servoState += 1;
  8000eb6:	4b14      	ldr	r3, [pc, #80]	@ (8000f08 <HAL_GPIO_EXTI_Callback+0x8c>)
  8000eb8:	781b      	ldrb	r3, [r3, #0]
@@ -1988,35 +1959,34 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
  8000f0c:	08005a24 	.word	0x08005a24
 
 08000f10 <Error_Handler>:
+
 /**
   * @brief  This function is executed in case of error occurrence.
   * @retval None
   */
-void Error_Handler(void)
-{
+void Error_Handler(void) {
  8000f10:	b580      	push	{r7, lr}
  8000f12:	af00      	add	r7, sp, #0
-  /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
-	HAL_GPIO_WritePin(GPIOB, RedLed_Pin, RESET);
+    /* USER CODE BEGIN Error_Handler_Debug */
+    HAL_GPIO_WritePin(GPIOB, RedLed_Pin, RESET);
  8000f14:	2200      	movs	r2, #0
  8000f16:	2101      	movs	r1, #1
  8000f18:	480b      	ldr	r0, [pc, #44]	@ (8000f48 <Error_Handler+0x38>)
  8000f1a:	f001 fc13 	bl	8002744 <HAL_GPIO_WritePin>
-	HAL_GPIO_WritePin(GPIOA, Buzzer_Pin, RESET);
+    HAL_GPIO_WritePin(GPIOA, Buzzer_Pin, RESET);
  8000f1e:	2200      	movs	r2, #0
  8000f20:	2101      	movs	r1, #1
  8000f22:	f04f 4090 	mov.w	r0, #1207959552	@ 0x48000000
  8000f26:	f001 fc0d 	bl	8002744 <HAL_GPIO_WritePin>
-	HAL_GPIO_WritePin(GPIOB, LD3_Pin, RESET);
+    HAL_GPIO_WritePin(GPIOB, LD3_Pin, RESET);
  8000f2a:	2200      	movs	r2, #0
  8000f2c:	2108      	movs	r1, #8
  8000f2e:	4806      	ldr	r0, [pc, #24]	@ (8000f48 <Error_Handler+0x38>)
  8000f30:	f001 fc08 	bl	8002744 <HAL_GPIO_WritePin>
-	CAN_Print_Errors();
+    CAN_Print_Errors();
  8000f34:	f7ff fc42 	bl	80007bc <CAN_Print_Errors>
 
-	SEND_STRING("Resetting due to error\n\r");
+    SEND_STRING("Resetting due to error\n\r");
  8000f38:	2118      	movs	r1, #24
  8000f3a:	4804      	ldr	r0, [pc, #16]	@ (8000f4c <Error_Handler+0x3c>)
  8000f3c:	f000 fa54 	bl	80013e8 <UART_Send>
@@ -2025,9 +1995,8 @@ void Error_Handler(void)
 }
  8000f42:	bf00      	nop
 
-  __disable_irq();  // Ensure no interrupts interfere
-
-  NVIC_SystemReset();
+    __disable_irq();  // Ensure no interrupts interfere
+    NVIC_SystemReset(); // Software reset
  8000f44:	f7ff fe04 	bl	8000b50 <__NVIC_SystemReset>
  8000f48:	48000400 	.word	0x48000400
  8000f4c:	08005a38 	.word	0x08005a38
