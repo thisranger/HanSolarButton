@@ -1,0 +1,4 @@
+../Core/Src/main.c:73:5:main	3
+../Core/Src/main.c:129:6:toggle_buzzer_led	1
+../Core/Src/main.c:147:6:SystemClock_Config	4
+../Core/Src/main.c:211:6:Error_Handler	1
